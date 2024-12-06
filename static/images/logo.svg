@@ -1,7 +1,7 @@
 <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
     <style>
-        .wings { fill: #6610f2; }
-        .body { fill: #6f42c1; }
+        .wings { fill: #2196F3; }
+        .body { fill: #64B5F6; }
     </style>
     <g transform="translate(2, 2)">
         <!-- Wings -->
