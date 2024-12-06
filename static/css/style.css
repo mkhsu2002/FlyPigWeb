@@ -126,6 +126,64 @@ body {
     margin-bottom: 1rem;
 }
 
+/* Portfolio Section */
+.portfolio-section {
+    padding: 100px 0;
+    background-color: #ffffff;
+}
+
+.portfolio-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(33, 150, 243, 0.1);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+}
+
+.portfolio-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.portfolio-card h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.portfolio-card .client {
+    color: var(--secondary-color);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.portfolio-card .achievement ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.portfolio-card .achievement ul li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.portfolio-card .achievement ul li::before {
+    content: "✓";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+}
+
 /* Contact Section */
 .contact-section {
     padding: 100px 0;
