@@ -1,0 +1,38 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FlyPig AI\n"
+"POT-Creation-Date: 2024-12-07 00:00\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "首頁"
+msgstr "Home"
+
+msgid "願景"
+msgstr "Vision"
+
+msgid "服務"
+msgstr "Services"
+
+msgid "作品集"
+msgstr "Portfolio"
+
+msgid "聯絡我們"
+msgstr "Contact Us"
+
+msgid "試用 FlyPig-Chat"
+msgstr "Try FlyPig-Chat"
+
+msgid "AI 賦能，助您起飛"
+msgstr "AI Empowerment, Help You Take Off"
+
+msgid "打造智能未來，實現無限可能"
+msgstr "Build an Intelligent Future, Realize Unlimited Possibilities"
+
+msgid "企業理念"
+msgstr "Corporate Philosophy"
+
+msgid "感謝您的訊息！我們已收到您關於%(service)s服務的諮詢，會盡快回覆。"
+msgstr "Thank you for your message! We have received your inquiry about %(service)s service and will reply soon."

@@ -49,6 +49,16 @@
                             <i class="fas fa-robot me-2"></i>試用 FlyPig-Chat
                         </a>
                     </li>
+                    <li class="nav-item dropdown ms-lg-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe me-1"></i>{{ languages[session.get('language', 'zh')] }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for code, name in languages.items() %}
+                            <li><a class="dropdown-item" href="{{ url_for('set_language', language=code) }}">{{ name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
