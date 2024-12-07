@@ -17,18 +17,18 @@ LANGUAGES = {
 }
 
 # Babel configuration
-babel = Babel()
 app.config['BABEL_DEFAULT_LOCALE'] = 'zh'
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+babel = Babel()
 
 def get_locale():
     try:
         language = session.get('language')
-        if language:
+        if language in LANGUAGES:
             logging.debug(f"Using session language: {language}")
             return language
         logging.debug("No session language, using browser accept languages")
-        return request.accept_languages.best_match(LANGUAGES.keys())
+        return request.accept_languages.best_match(['zh', 'en', 'ja'])
     except Exception as e:
         logging.error(f"Error in get_locale: {str(e)}")
         return 'zh'
