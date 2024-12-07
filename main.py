@@ -1,13 +1,13 @@
-from flask import Flask, render_template, request, flash, g, session
-from flask_babel import Babel, gettext as _
+from flask import Flask, render_template, request, flash, g, session, Blueprint, current_app
+from flask_babel import Babel, get_locale, gettext as _
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 app.secret_key = 'flypig_ai_secret_key'  # Required for flash messages
-babel = Babel(app)
 
 # Available languages
 LANGUAGES = {
@@ -16,12 +16,22 @@ LANGUAGES = {
     'ja': '日本語'
 }
 
+# Babel configuration
+babel = Babel()
+app.config['BABEL_DEFAULT_LOCALE'] = 'zh'
+app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
+
 def get_locale():
-    # 如果session中有語言設定，使用該設定
-    if session.get('language'):
-        return session.get('language')
-    # 否則使用瀏覽器偏好語言
-    return request.accept_languages.best_match(LANGUAGES.keys())
+    try:
+        language = session.get('language')
+        if language:
+            logging.debug(f"Using session language: {language}")
+            return language
+        logging.debug("No session language, using browser accept languages")
+        return request.accept_languages.best_match(LANGUAGES.keys())
+    except Exception as e:
+        logging.error(f"Error in get_locale: {str(e)}")
+        return 'zh'
 
 babel.init_app(app, locale_selector=get_locale)
 
@@ -29,6 +39,7 @@ babel.init_app(app, locale_selector=get_locale)
 def set_language(language):
     if language in LANGUAGES:
         session['language'] = language
+        logging.debug(f"Language set to: {language}")
     return request.referrer or '/'
 
 @app.route('/', methods=['GET', 'POST'])

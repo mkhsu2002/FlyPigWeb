@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FlyPig AI\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-12-07 15:16+0000\n"
+"POT-Creation-Date: 2024-12-07 15:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -14,36 +14,48 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
+#: main.py:44
+#, python-format
+msgid "感謝您的訊息！我們已收到您關於%(service)s服務的諮詢，會盡快回覆。"
+msgstr ""
+
+#: templates/index.html:33
 msgid "首頁"
 msgstr "Home"
 
+#: templates/index.html:36
 msgid "願景"
 msgstr "Vision"
 
+#: templates/index.html:39
 msgid "服務"
 msgstr "Services"
 
+#: templates/index.html:42
 msgid "作品集"
 msgstr "Portfolio"
 
+#: templates/index.html:45
 msgid "聯絡我們"
 msgstr "Contact Us"
 
-msgid "試用 FlyPig-Chat"
-msgstr "Try FlyPig-Chat"
-
+#: templates/index.html:72
 msgid "AI 賦能，助您起飛"
 msgstr "AI Empowerment, Help You Take Off"
 
+#: templates/index.html:73
 msgid "打造智能未來，實現無限可能"
 msgstr "Build an Intelligent Future, Realize Unlimited Possibilities"
-
-msgid "企業理念"
-msgstr "Corporate Philosophy"
 
 #~ msgid "感謝您的訊息！我們已收到您關於%(service)s服務的諮詢，會盡快回覆。"
 #~ msgstr ""
 #~ "Thank you for your message! We "
 #~ "have received your inquiry about "
 #~ "%(service)s service and will reply soon."
+
+#~ msgid "試用 FlyPig-Chat"
+#~ msgstr "Try FlyPig-Chat"
+
+#~ msgid "企業理念"
+#~ msgstr "Corporate Philosophy"
 

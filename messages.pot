@@ -1,0 +1,52 @@
+# Translations template for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-12-07 15:19+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: main.py:44
+#, python-format
+msgid "感謝您的訊息！我們已收到您關於%(service)s服務的諮詢，會盡快回覆。"
+msgstr ""
+
+#: templates/index.html:33
+msgid "首頁"
+msgstr ""
+
+#: templates/index.html:36
+msgid "願景"
+msgstr ""
+
+#: templates/index.html:39
+msgid "服務"
+msgstr ""
+
+#: templates/index.html:42
+msgid "作品集"
+msgstr ""
+
+#: templates/index.html:45
+msgid "聯絡我們"
+msgstr ""
+
+#: templates/index.html:72
+msgid "AI 賦能，助您起飛"
+msgstr ""
+
+#: templates/index.html:73
+msgid "打造智能未來，實現無限可能"
+msgstr ""
+
