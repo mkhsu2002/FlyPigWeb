@@ -410,6 +410,15 @@
                                 <input type="email" class="form-control" name="email" placeholder="電子郵件" required>
                             </div>
                             <div class="mb-3">
+                                <select class="form-select" name="service" required>
+                                    <option value="" selected disabled>請選擇需求服務項目</option>
+                                    <option value="chatbot">智能客服機器人</option>
+                                    <option value="image">AI 影像生成</option>
+                                    <option value="social">社群自動化</option>
+                                    <option value="other">其他服務</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <textarea class="form-control" name="message" rows="5" placeholder="請留下您的訊息" required></textarea>
                             </div>
                             <div class="text-center">

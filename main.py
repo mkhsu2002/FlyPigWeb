@@ -12,10 +12,11 @@ def index():
     if request.method == 'POST':
         name = request.form.get('name')
         email = request.form.get('email')
+        service = request.form.get('service')
         message = request.form.get('message')
         
         # Here you would typically handle the form submission (e.g., send email)
-        flash('感謝您的訊息！我們會盡快回覆。', 'success')
+        flash(f'感謝您的訊息！我們已收到您關於{service}服務的諮詢，會盡快回覆。', 'success')
         
     return render_template('index.html')
 
