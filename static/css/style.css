@@ -340,3 +340,19 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* 飛天箭頭動畫 */
+@keyframes flyIn {
+    0% {
+        transform: translate(100%, 0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0, -20%);
+        opacity: 1;
+    }
+}
+
+#flying-arrow {
+    animation: flyIn 1.5s ease-out forwards;
+    transform-origin: center;
+}

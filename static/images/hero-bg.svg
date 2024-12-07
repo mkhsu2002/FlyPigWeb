@@ -28,4 +28,10 @@
     <circle cx="0" cy="0" r="45" opacity="0.2"/>
     <circle cx="0" cy="0" r="30" opacity="0.2"/>
   </g>
+
+  <!-- 飛天箭頭 -->
+  <g id="flying-arrow" transform="translate(1500,500)" class="arrow-animation">
+    <path d="M 0 200 L 100 0 L 200 200" stroke="#2196F3" stroke-width="8" fill="none"/>
+    <path d="M 100 0 L 100 400" stroke="#2196F3" stroke-width="8" fill="none"/>
+  </g>
 </svg>
