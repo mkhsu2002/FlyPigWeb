@@ -297,6 +297,27 @@ body {
 
 /* Responsive Design */
 /* Case Studies Styles */
+/* Chat Button Styles */
+.navbar .btn-primary {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #2196F3, #64B5F6);
+    border: none;
+    box-shadow: 0 2px 5px rgba(33, 150, 243, 0.2);
+}
+
+.navbar .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+    background: linear-gradient(45deg, #1976D2, #2196F3);
+}
+
+.navbar .btn-primary i {
+    font-size: 0.9em;
+}
+
 /* Case Studies Styles */
 .case-study-content {
     padding: 20px;
