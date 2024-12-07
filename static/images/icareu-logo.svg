@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80">
+  <style>
+    .icare-text { fill: #8CC63F; }
+    .u-text { fill: #8CC63F; }
+  </style>
+  <text x="10" y="60" class="icare-text" font-family="Arial Black" font-size="60">ICare</text>
+  <text x="150" y="60" class="u-text" font-family="Arial Black" font-size="60">U</text>
+</svg>
