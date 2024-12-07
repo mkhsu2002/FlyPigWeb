@@ -30,35 +30,26 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#hero">{{ gettext('首頁') }}</a>
+                        <a class="nav-link" href="#hero">首頁</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#vision">{{ gettext('願景') }}</a>
+                        <a class="nav-link" href="#vision">願景</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#services">{{ gettext('服務') }}</a>
+                        <a class="nav-link" href="#services">服務</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">{{ gettext('作品集') }}</a>
+                        <a class="nav-link" href="#portfolio">作品集</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">{{ gettext('聯絡我們') }}</a>
+                        <a class="nav-link" href="#contact">聯絡我們</a>
                     </li>
                     <li class="nav-item ms-lg-3">
                         <a class="btn btn-primary" href="https://flypigai-chat.icareu.tw/" target="_blank">
                             <i class="fas fa-robot me-2"></i>試用 FlyPig-Chat
                         </a>
                     </li>
-                    <li class="nav-item dropdown ms-lg-3">
-                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-globe me-1"></i>{{ languages[session.get('language', 'zh')] }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            {% for code, name in languages.items() %}
-                            <li><a class="dropdown-item" href="{{ url_for('set_language', language=code) }}">{{ name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -69,8 +60,8 @@
         <div class="container">
             <div class="row align-items-center min-vh-100">
                 <div class="col-lg-6" data-aos="fade-right">
-                    <h1>{{ gettext('AI 賦能，助您起飛') }}</h1>
-                    <p class="lead">{{ gettext('打造智能未來，實現無限可能') }}</p>
+                    <h1>AI 賦能，助您起飛</h1>
+                    <p class="lead">打造智能未來，實現無限可能</p>
                 </div>
             </div>
         </div>
