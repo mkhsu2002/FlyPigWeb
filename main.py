@@ -17,9 +17,11 @@ LANGUAGES = {
 }
 
 def get_locale():
-    if not session.get('language'):
-        session['language'] = request.accept_languages.best_match(LANGUAGES.keys())
-    return session.get('language')
+    # 如果session中有語言設定，使用該設定
+    if session.get('language'):
+        return session.get('language')
+    # 否則使用瀏覽器偏好語言
+    return request.accept_languages.best_match(LANGUAGES.keys())
 
 babel.init_app(app, locale_selector=get_locale)
 
