@@ -340,19 +340,58 @@ body {
         grid-template-columns: 1fr;
     }
 }
-/* 飛天箭頭動畫 */
+/* 成長動畫效果 */
 @keyframes flyIn {
     0% {
-        transform: translate(100%, 0);
+        transform: translate(200px, 100px) rotate(10deg);
         opacity: 0;
     }
     100% {
-        transform: translate(0, -20%);
+        transform: translate(0, 0) rotate(0deg);
         opacity: 1;
     }
 }
 
-#flying-arrow {
-    animation: flyIn 1.5s ease-out forwards;
+@keyframes flapWings {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-20deg); }
+}
+
+@keyframes showChart {
+    from {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+#flying-pig {
+    animation: flyIn 2s ease-out forwards;
+}
+
+.wing-left, .wing-right {
+    animation: flapWings 0.8s ease-in-out infinite;
     transform-origin: center;
 }
+
+.wing-right {
+    animation-delay: 0.1s;
+}
+
+#chart {
+    opacity: 0;
+    animation: showChart 1.5s ease-out 1s forwards;
+    transform-origin: bottom;
+}
+
+#chart rect {
+    animation: showChart 1s ease-out forwards;
+}
+
+#chart rect:nth-child(1) { animation-delay: 1.2s; }
+#chart rect:nth-child(2) { animation-delay: 1.4s; }
+#chart rect:nth-child(3) { animation-delay: 1.6s; }
+#chart rect:nth-child(4) { animation-delay: 1.8s; }
