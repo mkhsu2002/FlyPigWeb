@@ -73,7 +73,23 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 監聽表單提交事件
         contactForm.addEventListener('submit', function(e) {
-            // 不阻止默認提交行為，讓表單正常提交到 hidden_iframe
+            // 檢查是否選擇了至少一個服務選項
+            const serviceCheckboxes = document.querySelectorAll('input[name="entry.1834065246"]:checked');
+            if (serviceCheckboxes.length === 0) {
+                e.preventDefault(); // 阻止表單提交
+                
+                // 顯示錯誤訊息
+                const formStatus = document.getElementById('formStatus');
+                if (formStatus) {
+                    formStatus.innerHTML = '請至少選擇一項服務需求';
+                    formStatus.className = 'error mt-3 text-center p-3';
+                }
+                
+                // 滾動到錯誤訊息位置
+                formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                return false;
+            }
             
             // 標記表單已提交，用於 iframe onload 事件判斷
             contactForm.classList.add('submitted');

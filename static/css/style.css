@@ -236,6 +236,37 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.2);
 }
 
+/* 複選框樣式 */
+.contact-form .form-check {
+    margin-bottom: 10px;
+    padding-left: 28px;
+}
+
+.contact-form .form-check-input {
+    width: 18px;
+    height: 18px;
+    margin-left: -28px;
+    margin-top: 3px;
+    border-color: #b0b0b0;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.contact-form .form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.contact-form .form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.2);
+    border-color: var(--primary-color);
+}
+
+.contact-form .form-check-label {
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
 .contact-form .form-label {
     font-weight: 500;
     color: #333;
