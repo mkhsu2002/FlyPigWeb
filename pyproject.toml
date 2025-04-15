@@ -10,4 +10,5 @@ dependencies = [
     "psycopg2-binary>=2.9.10",
     "flask-babel",
     "trafilatura>=2.0.0",
+    "sendgrid>=6.11.0",
 ]

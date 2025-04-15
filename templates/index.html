@@ -485,21 +485,48 @@
                 <div class="col-lg-8" data-aos="fade-up">
                     <div class="contact-form-container">
                         <h2 class="text-center mb-4">聯絡我們</h2>
-                        <p class="text-center mb-4">請填寫以下表單，我們將盡快與您聯繫</p>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-success">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <form action="mailto:flypig@icareu.tw" method="POST" enctype="text/plain">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="name" placeholder="您的姓名" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" name="email" placeholder="電子郵件" required>
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select" name="service" required>
+                                    <option value="" selected disabled>請選擇需求服務項目</option>
+                                    <option value="AI Line Bot">LLM強化 AI Line Bot</option>
+                                    <option value="智能客服機器人">智能客服機器人</option>
+                                    <option value="AI影像生成">電商AI影像生成</option>
+                                    <option value="AI KOL訂製">AI KOL訂製</option>
+                                    <option value="多智能體策略決策會議">多智能體策略決策會議</option>
+                                    <option value="社群行銷自動化">社群行銷自動化</option>
+                                    <option value="其他服務">其他服務</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" name="message" rows="5" placeholder="請留下您的訊息" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">送出訊息</button>
+                            </div>
+                        </form>
                         
-                        <!-- Google Form Embed -->
-                        <div class="google-form-container">
-                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdlW1HGrC5Y9FkgkiTZOLiJJ46c2hS7sJQRB_quxd7Hu4jDOA/viewform?embedded=true" 
-                                width="100%" height="780" frameborder="0" marginheight="0" marginwidth="0">載入中…
-                            </iframe>
-                        </div>
-                        
-                        <!-- Alternative Contact Info -->
-                        <div class="mt-4 text-center">
-                            <p>或直接聯繫我們</p>
-                            <p><i class="fas fa-envelope me-2"></i> info@flypigai.com</p>
-                            <p><i class="fas fa-phone me-2"></i> (02) 1234-5678</p>
-                            <p><i class="fab fa-line me-2"></i> LINE ID: @flypigai</p>
+                        <!-- Additional Contact Info -->
+                        <div class="mt-5 text-center">
+                            <hr>
+                            <div class="mt-4 contact-info">
+                                <p><i class="fas fa-envelope me-2"></i> flypig@icareu.tw</p>
+                                <p><i class="fas fa-phone me-2"></i> (02) 1234-5678</p>
+                                <p><i class="fab fa-line me-2"></i> LINE ID: @icareutw</p>
+                            </div>
                         </div>
                     </div>
                 </div>

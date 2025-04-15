@@ -7,8 +7,13 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 app.secret_key = 'flypig_ai_secret_key'  # Required for flash messages
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        # We won't actually process this since we're using mailto:
+        # But keep the flash message functionality in case we need it later
+        flash('感謝您的訊息！我們將盡快回覆您。', 'success')
+        
     return render_template('index.html')
 
 @app.route('/line-bot-service')
