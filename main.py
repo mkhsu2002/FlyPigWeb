@@ -13,14 +13,14 @@ app.secret_key = 'flypig_ai_secret_key'  # Required for flash messages
 
 # 郵件伺服器設定
 SMTP_SERVER = 'mail.icareu.tw'  # 您的郵件伺服器地址
-SMTP_PORT = 587  # 郵件伺服器端口，常見的有 25, 465(SSL), 587(TLS)
+SMTP_PORT = 465  # 使用 SSL 加密的端口
 SMTP_USERNAME = 'flypig@icareu.tw'  # 您的郵件帳號
 SMTP_PASSWORD = os.environ.get('EMAIL_PASSWORD', '')  # 從環境變數獲取密碼
 RECIPIENT_EMAIL = 'flypig@icareu.tw'  # 接收郵件的地址
 
 def send_email(name, email, service, message):
     """
-    使用 SMTP 發送郵件
+    使用 SMTP_SSL 發送郵件 (SSL 加密連線)
     """
     try:
         # 創建郵件對象
@@ -31,20 +31,18 @@ def send_email(name, email, service, message):
         
         # 郵件內容
         body = f"""
-        收到來自網站的新諮詢：
-        
-        姓名: {name}
-        郵箱: {email}
-        服務: {service}
-        訊息:
-        {message}
+收到來自網站的新諮詢：
+
+姓名: {name}
+郵箱: {email}
+服務: {service}
+訊息:
+{message}
         """
         msg.attach(MIMEText(body, 'plain'))
         
-        # 連接到 SMTP 伺服器並發送郵件
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.ehlo()  # 可以幫助識別您自己
-            server.starttls()  # 啟用TLS加密
+        # 使用 SSL 連接到 SMTP 伺服器並發送郵件
+        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
             server.login(SMTP_USERNAME, SMTP_PASSWORD)
             server.send_message(msg)
             
