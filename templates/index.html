@@ -512,15 +512,16 @@
                                     <label for="service" class="form-label">服務需求 <span class="text-danger">*</span></label>
                                     <select class="form-select" id="service" name="service" required>
                                         <option value="" selected disabled>請選擇服務類型...</option>
-                                        <option value="line-bot">LLM 增強版 AI Line 機器人</option>
-                                        <option value="ai-kol">AI KOL 定制</option>
-                                        <option value="multi-agent">多代理人策略決策會議</option>
-                                        <option value="other">其他需求</option>
+                                        <option value="LineBot客服">LineBot客服</option>
+                                        <option value="企業知識庫建置">企業知識庫建置</option>
+                                        <option value="多代理會議">多代理會議</option>
+                                        <option value="AI KOL客製">AI KOL客製</option>
+                                        <option value="其他需求">其他需求</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="message" class="form-label">訊息內容 <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                    <label for="message" class="form-label">訊息內容</label>
+                                    <textarea class="form-control" id="message" name="message" rows="5"></textarea>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary px-5 py-2">提交諮詢</button>

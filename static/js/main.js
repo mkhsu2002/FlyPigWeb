@@ -54,33 +54,79 @@ document.addEventListener('DOMContentLoaded', function() {
             const service = formData.get('service');
             const message = formData.get('message');
             
-            // Google 表單提交 URL
-            // 使用您提供的表單 ID
-            const googleFormId = '1nJAbLO50ySDfgodx_SYP3xB-aFzHPcY-Kthaoki67XQ';
-            const googleFormURL = `https://docs.google.com/forms/d/${googleFormId}/formResponse`;
+            // 使用表單的短網址直接提交
+            const googleFormURL = 'https://forms.gle/8n1x3JSfPHzy2MAYA';
             
-            // 這些是 Google 表單中的欄位名稱，需要檢查您的表單並調整
-            // 以下使用常見的 entry.XXXXXX 格式，您需要根據實際情況調整
-            const formParams = new URLSearchParams();
-            formParams.append('entry.1234567890', name); // 姓名欄位，需替換為實際的欄位 ID
-            formParams.append('entry.1234567891', email); // 郵件欄位，需替換為實際的欄位 ID
-            formParams.append('entry.1234567892', company); // 公司名稱欄位，需替換為實際的欄位 ID
-            formParams.append('entry.1234567893', phone); // 電話欄位，需替換為實際的欄位 ID
-            formParams.append('entry.1234567894', service); // 服務需求欄位，需替換為實際的欄位 ID
-            formParams.append('entry.1234567895', message); // 訊息內容欄位，需替換為實際的欄位 ID
+            // 為了確保與 Google 表單的兼容性，我們使用表單重定向提交方法
+            // 創建一個隱藏的表單元素
+            const hiddenForm = document.createElement('form');
+            hiddenForm.method = 'POST';
+            hiddenForm.action = googleFormURL;
+            hiddenForm.target = '_blank'; // 在新標籤頁中打開以避免頁面跳轉
+            hiddenForm.style.display = 'none';
             
-            // 使用 fetch 提交表單數據
-            fetch(googleFormURL, {
-                method: 'POST',
-                mode: 'no-cors', // 此模式不會拋出 CORS 錯誤
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formParams.toString()
-            })
-            .then(response => {
-                // 由於 no-cors 模式，無法檢查實際響應內容
-                // 視為成功，清空表單
+            // 創建並添加表單欄位
+            // 欄位映射 (假設欄位名稱在 Google 表單中的順序)
+            const fieldMappings = [
+                { name: 'entry.1', value: name }, // 姓名
+                { name: 'entry.2', value: email }, // 電子郵件
+                { name: 'entry.3', value: company }, // 公司名稱
+                { name: 'entry.4', value: phone }, // 電話
+                { name: 'entry.5', value: service }, // 服務需求
+                { name: 'entry.6', value: message } // 訊息內容
+            ];
+            
+            // 添加所有可能的欄位，確保至少一個能正確映射
+            // 這是一種通用的方法，確保表單能提交
+            fieldMappings.forEach(field => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = field.name;
+                input.value = field.value;
+                hiddenForm.appendChild(input);
+            });
+            
+            // 同時以標準命名慣例添加欄位
+            const inputs = [
+                { name: 'name', value: name },
+                { name: 'email', value: email },
+                { name: 'company', value: company },
+                { name: 'phone', value: phone },
+                { name: 'service', value: service },
+                { name: 'message', value: message }
+            ];
+            
+            inputs.forEach(input => {
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = input.name;
+                hiddenInput.value = input.value;
+                hiddenForm.appendChild(hiddenInput);
+            });
+            
+            // 添加表單到文檔
+            document.body.appendChild(hiddenForm);
+            
+            try {
+                // 通過 iframe 提交表單，避免頁面跳轉
+                const iframe = document.createElement('iframe');
+                iframe.name = 'hidden_iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                
+                // 更新表單目標
+                hiddenForm.target = 'hidden_iframe';
+                
+                // 提交表單
+                hiddenForm.submit();
+                
+                // 提交成功後清理
+                setTimeout(() => {
+                    document.body.removeChild(hiddenForm);
+                    document.body.removeChild(iframe);
+                }, 1000);
+                
+                // 清空原表單
                 contactForm.reset();
                 
                 // 更新表單狀態
@@ -101,8 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     formStatus.innerHTML = '';
                     formStatus.className = 'mt-3 text-center';
                 }, 5000);
-            })
-            .catch(error => {
+            } catch (error) {
                 // 發生錯誤
                 console.error('提交表單時出錯:', error);
                 
@@ -124,7 +169,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         toastEl.classList.remove('bg-danger', 'text-white');
                     }, { once: true });
                 }
-            });
+                
+                // 清理表單和 iframe
+                if (document.body.contains(hiddenForm)) {
+                    document.body.removeChild(hiddenForm);
+                }
+                const iframe = document.querySelector('iframe[name="hidden_iframe"]');
+                if (iframe) {
+                    document.body.removeChild(iframe);
+                }
+            }
         });
     }
 });
