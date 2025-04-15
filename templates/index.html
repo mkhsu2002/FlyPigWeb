@@ -485,14 +485,14 @@
                 <div class="col-lg-8" data-aos="fade-up">
                     <div class="contact-form-container">
                         <h2 class="text-center mb-4">聯絡我們</h2>
-                        {% with messages = get_flashed_messages() %}
+                        {% with messages = get_flashed_messages(with_categories=true) %}
                             {% if messages %}
-                                {% for message in messages %}
-                                    <div class="alert alert-success">{{ message }}</div>
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }}">{{ message }}</div>
                                 {% endfor %}
                             {% endif %}
                         {% endwith %}
-                        <form action="mailto:flypig@icareu.tw" method="POST" enctype="text/plain">
+                        <form action="/" method="POST">
                             <div class="mb-3">
                                 <input type="text" class="form-control" name="name" placeholder="您的姓名" required>
                             </div>
