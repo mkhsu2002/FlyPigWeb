@@ -7,17 +7,8 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 app.secret_key = 'flypig_ai_secret_key'  # Required for flash messages
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        service = request.form.get('service')
-        message = request.form.get('message')
-        
-        # Here you would typically handle the form submission (e.g., send email)
-        flash(f'感謝您的訊息！我們已收到您關於{service}服務的諮詢，會盡快回覆。', 'success')
-        
     return render_template('index.html')
 
 @app.route('/line-bot-service')
