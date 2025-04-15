@@ -485,66 +485,10 @@
                 <div class="col-lg-8" data-aos="fade-up">
                     <div class="contact-form-container">
                         <h2 class="text-center mb-4">聯絡我們</h2>
-                        <!-- 直接使用 Google 表單 URL 的自定義表單 -->
-                        <div class="custom-form-container mb-4">
-                            <form id="customContactForm" class="contact-form" action="https://docs.google.com/forms/d/e/1FAIpQLSee6pC1pD4fCvlUX0l_YUP7pZW3DnFQqZVXOSXyjq06Ng_D6A/formResponse" method="POST" target="hidden_iframe">
-                                <div class="row mb-3">
-                                    <div class="col-md-6 mb-3 mb-md-0">
-                                        <label for="entry.1201889512" class="form-label">姓名 <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="entry.1201889512" name="entry.1201889512" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="entry.1729219926" class="form-label">電子郵件 <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="entry.1729219926" name="entry.1729219926" required>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6 mb-3 mb-md-0">
-                                        <label for="entry.1495626194" class="form-label">公司名稱</label>
-                                        <input type="text" class="form-control" id="entry.1495626194" name="entry.1495626194">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="entry.1571515622" class="form-label">電話</label>
-                                        <input type="tel" class="form-control" id="entry.1571515622" name="entry.1571515622">
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">服務需求 <span class="text-danger">*</span></label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="entry.1834065246" id="service1" value="升級LINE官方帳號/AI智能聊天機器人">
-                                        <label class="form-check-label" for="service1">升級LINE官方帳號/AI智能聊天機器人</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="entry.1834065246" id="service2" value="AI KOL 訂製/虛擬網紅、數位克隆">
-                                        <label class="form-check-label" for="service2">AI KOL 訂製/虛擬網紅、數位克隆</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="entry.1834065246" id="service3" value="AI電商美編/數位影像工作流">
-                                        <label class="form-check-label" for="service3">AI電商美編/數位影像工作流</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="entry.1834065246" id="service4" value="社群行銷自動化">
-                                        <label class="form-check-label" for="service4">社群行銷自動化</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="entry.1834065246" id="service5" value="Multi AI Agents 多智能體協作">
-                                        <label class="form-check-label" for="service5">Multi AI Agents 多智能體協作</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="entry.1834065246" id="service6" value="其他">
-                                        <label class="form-check-label" for="service6">其他</label>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="entry.583858606" class="form-label">訊息內容</label>
-                                    <textarea class="form-control" id="entry.583858606" name="entry.583858606" rows="5"></textarea>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary px-5 py-2">提交諮詢</button>
-                                </div>
-                                <div id="formStatus" class="mt-3 text-center"></div>
-                            </form>
-                            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+                        <!-- 嵌入的 Google 表單，使用自定義樣式 -->
+                        <div class="google-form-wrapper mb-4">
+                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSee6pC1pD4fCvlUX0l_YUP7pZW3DnFQqZVXOSXyjq06Ng_D6A/viewform?embedded=true" 
+                                class="google-form-embed" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
                         </div>
                         
                         <!-- 移除了聯絡資訊區塊，避免與頁腳重複 -->

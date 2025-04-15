@@ -211,60 +211,26 @@ body {
     color: var(--text-color);
 }
 
-.custom-form-container {
+.google-form-wrapper {
     width: 100%;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    padding: 15px;
+    padding: 5px;
+    overflow: hidden;
 }
 
-.contact-form .form-control,
-.contact-form .form-select {
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    background-color: #f9f9f9;
-    transition: all 0.3s ease;
-    font-size: 0.95rem;
+.google-form-embed {
+    width: 100%;
+    min-height: 800px;
+    border: none;
 }
 
-.contact-form .form-control:focus,
-.contact-form .form-select:focus {
-    border-color: var(--primary-color);
-    background-color: #ffffff;
-    box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.2);
-}
-
-/* 複選框樣式 */
-.contact-form .form-check {
-    margin-bottom: 10px;
-    padding-left: 28px;
-}
-
-.contact-form .form-check-input {
-    width: 18px;
-    height: 18px;
-    margin-left: -28px;
-    margin-top: 3px;
-    border-color: #b0b0b0;
-    box-shadow: none;
-    cursor: pointer;
-}
-
-.contact-form .form-check-input:checked {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.contact-form .form-check-input:focus {
-    box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.2);
-    border-color: var(--primary-color);
-}
-
-.contact-form .form-check-label {
-    font-size: 0.95rem;
-    cursor: pointer;
+/* 改進 Google 表單在移動設備上的響應式顯示 */
+@media (max-width: 768px) {
+    .google-form-embed {
+        min-height: 1000px;
+    }
 }
 
 .contact-form .form-label {
