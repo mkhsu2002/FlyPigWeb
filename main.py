@@ -13,8 +13,8 @@ def index():
 
 @app.before_request
 def redirect_to_canonical():
-    """確保所有請求使用規範化的URL"""
-    if request.url.endswith('/'):
+    """確保所有請求使用規範化的URL，但排除根路徑 /"""
+    if request.url.endswith('/') and request.path != '/':
         return redirect(request.url.rstrip('/'))
 
 @app.route('/line-bot-service')
