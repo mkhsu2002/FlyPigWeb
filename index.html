@@ -159,6 +159,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="static/css/style.css">
+    <!-- Enhanced Contact Form CSS -->
+    <link rel="stylesheet" href="static/css/contact-form.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -626,16 +628,10 @@
     <section id="contact" class="contact-section" style="background-image: url('https://images.unsplash.com/photo-1463620695885-8a91d87c53d0');">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8" data-aos="fade-up">
-                    <div class="contact-form-container">
-                        <h2 class="text-center mb-4">聯絡我們</h2>
-                        <!-- 嵌入的 Google 表單，使用自定義樣式 -->
-                        <div class="google-form-wrapper mb-4">
-                            <iframe src="https://docs.google.com/forms/d/1nJAbLO50ySDfgodx_SYP3xB-aFzHPcY-Kthaoki67XQ/viewform?embedded=true" 
-                                class="google-form-embed" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
-                        </div>
-                        
-                        <!-- 移除了聯絡資訊區塊，避免與頁腳重複 -->
+                <div class="col-lg-10" data-aos="fade-up">
+                    <!-- 優化的業務洽詢表格 -->
+                    <div id="enhanced-contact-form-container">
+                        <!-- 表格內容將透過 JavaScript 載入 -->
                     </div>
                 </div>
             </div>
@@ -676,5 +672,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="static/js/main.js"></script>
+    <script src="static/js/enhanced-contact-form.js"></script>
+    
+    <!-- 載入優化表格 -->
+    <script>
+        // 載入優化的聯絡表格
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('enhanced-contact-form.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('enhanced-contact-form-container').innerHTML = html;
+                    
+                    // 重新初始化表格功能
+                    if (window.EnhancedContactForm) {
+                        new EnhancedContactForm();
+                    }
+                })
+                .catch(error => {
+                    console.error('載入表格失敗:', error);
+                    // 回退到原始 Google Forms
+                    document.getElementById('enhanced-contact-form-container').innerHTML = `
+                        <div class="contact-form-container">
+                            <h2 class="text-center mb-4">聯絡我們</h2>
+                            <div class="google-form-wrapper mb-4">
+                                <iframe src="https://docs.google.com/forms/d/1nJAbLO50ySDfgodx_SYP3xB-aFzHPcY-Kthaoki67XQ/viewform?embedded=true" 
+                                    class="google-form-embed" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
+                            </div>
+                        </div>
+                    `;
+                });
+        });
+    </script>
 </body>
 </html>

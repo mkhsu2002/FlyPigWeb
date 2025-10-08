@@ -1,0 +1,196 @@
+<!-- FlyPig AI 業務洽詢表格 - 優化版本 -->
+<div class="enhanced-contact-form">
+    <h2 class="form-title">
+        <i class="fas fa-rocket me-3"></i>業務洽詢
+    </h2>
+    <p class="form-subtitle">
+        立即與我們的 AI 專家聯繫，為您的企業量身打造最適合的解決方案
+    </p>
+    
+    <form id="enhancedContactForm" class="contact-form-enhanced">
+        <!-- 基本資訊 -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group-enhanced">
+                    <label for="companyName">
+                        <i class="fas fa-building me-2"></i>公司名稱 <span class="required">*</span>
+                    </label>
+                    <input type="text" 
+                           id="companyName" 
+                           name="companyName" 
+                           class="form-control-enhanced" 
+                           placeholder="請輸入您的公司名稱"
+                           required>
+                    <div class="field-error" id="companyNameError">請輸入公司名稱</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group-enhanced">
+                    <label for="contactPerson">
+                        <i class="fas fa-user me-2"></i>聯絡人 <span class="required">*</span>
+                    </label>
+                    <input type="text" 
+                           id="contactPerson" 
+                           name="contactPerson" 
+                           class="form-control-enhanced" 
+                           placeholder="請輸入聯絡人姓名"
+                           required>
+                    <div class="field-error" id="contactPersonError">請輸入聯絡人姓名</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group-enhanced">
+                    <label for="email">
+                        <i class="fas fa-envelope me-2"></i>電子信箱 <span class="required">*</span>
+                    </label>
+                    <input type="email" 
+                           id="email" 
+                           name="email" 
+                           class="form-control-enhanced" 
+                           placeholder="your@company.com"
+                           required>
+                    <div class="field-error" id="emailError">請輸入有效的電子信箱</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group-enhanced">
+                    <label for="phone">
+                        <i class="fas fa-phone me-2"></i>聯絡電話 <span class="required">*</span>
+                    </label>
+                    <input type="tel" 
+                           id="phone" 
+                           name="phone" 
+                           class="form-control-enhanced" 
+                           placeholder="02-1234-5678"
+                           required>
+                    <div class="field-error" id="phoneError">請輸入聯絡電話</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 服務需求 -->
+        <div class="form-group-enhanced">
+            <label>
+                <i class="fas fa-cogs me-2"></i>感興趣的服務 <span class="required">*</span>
+            </label>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="service1" name="services" value="LLM強化AI Line Bot">
+                    <label for="service1">
+                        <i class="fab fa-line me-2"></i>LLM強化 AI Line Bot
+                    </label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="service2" name="services" value="智能客服機器人">
+                    <label for="service2">
+                        <i class="fas fa-robot me-2"></i>智能客服機器人
+                    </label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="service3" name="services" value="電商AI影像生成">
+                    <label for="service3">
+                        <i class="fas fa-image me-2"></i>電商AI影像生成
+                    </label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="service4" name="services" value="AI KOL訂製">
+                    <label for="service4">
+                        <i class="fas fa-user-astronaut me-2"></i>AI KOL訂製
+                    </label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="service5" name="services" value="多智能體策略決策會議">
+                    <label for="service5">
+                        <i class="fas fa-brain me-2"></i>多智能體策略決策會議
+                    </label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="service6" name="services" value="社群行銷自動化">
+                    <label for="service6">
+                        <i class="fas fa-share-nodes me-2"></i>社群行銷自動化
+                    </label>
+                </div>
+            </div>
+            <div class="field-error" id="servicesError">請至少選擇一項服務</div>
+        </div>
+
+        <!-- 預算範圍 -->
+        <div class="form-group-enhanced">
+            <label for="budget">
+                <i class="fas fa-dollar-sign me-2"></i>預算範圍
+            </label>
+            <select id="budget" name="budget" class="form-control-enhanced form-select-enhanced">
+                <option value="">請選擇預算範圍</option>
+                <option value="10萬以下">10萬以下</option>
+                <option value="10-50萬">10-50萬</option>
+                <option value="50-100萬">50-100萬</option>
+                <option value="100-500萬">100-500萬</option>
+                <option value="500萬以上">500萬以上</option>
+                <option value="面議">面議</option>
+            </select>
+        </div>
+
+        <!-- 專案時程 -->
+        <div class="form-group-enhanced">
+            <label for="timeline">
+                <i class="fas fa-calendar-alt me-2"></i>期望完成時間
+            </label>
+            <select id="timeline" name="timeline" class="form-control-enhanced form-select-enhanced">
+                <option value="">請選擇期望完成時間</option>
+                <option value="1個月內">1個月內</option>
+                <option value="1-3個月">1-3個月</option>
+                <option value="3-6個月">3-6個月</option>
+                <option value="6個月以上">6個月以上</option>
+                <option value="不急">不急</option>
+            </select>
+        </div>
+
+        <!-- 需求描述 -->
+        <div class="form-group-enhanced">
+            <label for="requirements">
+                <i class="fas fa-clipboard-list me-2"></i>詳細需求描述 <span class="required">*</span>
+            </label>
+            <textarea id="requirements" 
+                      name="requirements" 
+                      class="form-control-enhanced textarea" 
+                      placeholder="請詳細描述您的需求，包括：&#10;• 目前面臨的問題或挑戰&#10;• 希望達到的目標&#10;• 特殊要求或限制&#10;• 其他相關資訊"
+                      required></textarea>
+            <div class="field-error" id="requirementsError">請詳細描述您的需求</div>
+        </div>
+
+        <!-- 提交按鈕 -->
+        <div class="form-group-enhanced">
+            <button type="submit" class="btn-submit-enhanced" id="submitBtn">
+                <div class="loading-spinner"></div>
+                <span class="btn-text">
+                    <i class="fas fa-paper-plane me-2"></i>送出洽詢
+                </span>
+            </button>
+        </div>
+
+        <!-- 狀態訊息 -->
+        <div id="formStatus" class="form-status" style="display: none;"></div>
+    </form>
+
+    <!-- 成功畫面 -->
+    <div id="successMessage" class="form-success-animation" style="display: none;">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h3 style="color: #4CAF50; margin-bottom: 1rem;">提交成功！</h3>
+        <p style="color: #666; margin-bottom: 1.5rem;">
+            感謝您的洽詢！我們的專業團隊將在 24 小時內與您聯繫，為您提供最適合的 AI 解決方案。
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.facebook.com/FlyPigAI" target="_blank" class="btn btn-outline-primary">
+                <i class="fab fa-facebook-f me-2"></i>關注我們
+            </a>
+            <a href="tel:03-5735430" class="btn btn-outline-success">
+                <i class="fas fa-phone me-2"></i>立即致電
+            </a>
+        </div>
+    </div>
+</div>
