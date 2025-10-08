@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyPig AI - 表單數據管理</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .admin-header {
+            background: linear-gradient(135deg, #2196F3 0%, #64B5F6 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .submission-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #2196F3;
+        }
+        .submission-item.new {
+            border-left-color: #4CAF50;
+        }
+        .submission-item.pending {
+            border-left-color: #FF9800;
+        }
+        .btn-action {
+            margin: 0.2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .service-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            display: inline-block;
+        }
+        .export-btn {
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- 管理頁面標題 -->
+    <div class="admin-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1><i class="fas fa-chart-line me-3"></i>FlyPig AI 表單數據管理</h1>
+                    <p class="mb-0">業務洽詢表單數據監控與管理</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <a href="index.html" class="btn btn-light">
+                        <i class="fas fa-home me-2"></i>回到首頁
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 統計卡片 -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                    <h3 id="totalSubmissions">0</h3>
+                    <p class="text-muted mb-0">總提交數</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-clock fa-2x text-warning mb-3"></i>
+                    <h3 id="pendingSubmissions">0</h3>
+                    <p class="text-muted mb-0">待處理</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-check-circle fa-2x text-success mb-3"></i>
+                    <h3 id="processedSubmissions">0</h3>
+                    <p class="text-muted mb-0">已處理</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <i class="fas fa-calendar-day fa-2x text-info mb-3"></i>
+                    <h3 id="todaySubmissions">0</h3>
+                    <p class="text-muted mb-0">今日新增</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 操作按鈕 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-primary" onclick="refreshData()">
+                        <i class="fas fa-sync-alt me-2"></i>重新整理
+                    </button>
+                    <button class="export-btn" onclick="exportToCSV()">
+                        <i class="fas fa-download me-2"></i>匯出 CSV
+                    </button>
+                    <button class="btn btn-info" onclick="openGoogleForms()">
+                        <i class="fab fa-google me-2"></i>查看 Google Forms
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearLocalData()">
+                        <i class="fas fa-trash me-2"></i>清除本地數據
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 數據來源說明 -->
+        <div class="alert alert-info">
+            <h5><i class="fas fa-info-circle me-2"></i>數據來源說明</h5>
+            <ul class="mb-0">
+                <li><strong>主要數據來源：</strong><a href="https://docs.google.com/forms/d/1nJAbLO50ySDfgodx_SYP3xB-aFzHPcY-Kthaoki67XQ/responses" target="_blank">Google Forms 回應頁面</a></li>
+                <li><strong>備用數據：</strong>本地儲存的表單提交記錄（最多保留10筆）</li>
+                <li><strong>建議：</strong>定期檢查 Google Forms 以確保數據完整性</li>
+            </ul>
+        </div>
+
+        <!-- 表單提交列表 -->
+        <div class="row">
+            <div class="col-12">
+                <h3><i class="fas fa-list me-2"></i>最近的表單提交</h3>
+                <div id="submissionsList">
+                    <!-- 數據將透過 JavaScript 動態載入 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 管理面板 JavaScript
+        class AdminDashboard {
+            constructor() {
+                this.submissions = [];
+                this.init();
+            }
+
+            init() {
+                this.loadLocalSubmissions();
+                this.updateStats();
+                this.renderSubmissions();
+                
+                // 每30秒自動重新整理
+                setInterval(() => {
+                    this.loadLocalSubmissions();
+                    this.updateStats();
+                    this.renderSubmissions();
+                }, 30000);
+            }
+
+            loadLocalSubmissions() {
+                try {
+                    const stored = localStorage.getItem('flypig_contact_submissions');
+                    this.submissions = stored ? JSON.parse(stored) : [];
+                    this.submissions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                } catch (error) {
+                    console.error('載入本地數據失敗:', error);
+                    this.submissions = [];
+                }
+            }
+
+            updateStats() {
+                const total = this.submissions.length;
+                const pending = this.submissions.filter(s => s.status === 'pending_manual_review').length;
+                const processed = this.submissions.filter(s => s.status === 'processed').length;
+                
+                // 計算今日新增
+                const today = new Date().toDateString();
+                const todaySubmissions = this.submissions.filter(s => 
+                    new Date(s.timestamp).toDateString() === today
+                ).length;
+
+                document.getElementById('totalSubmissions').textContent = total;
+                document.getElementById('pendingSubmissions').textContent = pending;
+                document.getElementById('processedSubmissions').textContent = processed;
+                document.getElementById('todaySubmissions').textContent = todaySubmissions;
+            }
+
+            renderSubmissions() {
+                const container = document.getElementById('submissionsList');
+                
+                if (this.submissions.length === 0) {
+                    container.innerHTML = `
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            目前沒有本地儲存的表單提交記錄。請檢查 Google Forms 或等待新的表單提交。
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = this.submissions.map(submission => `
+                    <div class="submission-item ${submission.status}">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="d-flex align-items-center mb-2">
+                                    <h5 class="mb-0 me-3">${submission.companyName || '未提供公司名稱'}</h5>
+                                    <span class="badge bg-${submission.status === 'processed' ? 'success' : 'warning'}">
+                                        ${submission.status === 'processed' ? '已處理' : '待處理'}
+                                    </span>
+                                </div>
+                                <p class="mb-2">
+                                    <strong>聯絡人：</strong>${submission.contactPerson || '未提供'}
+                                    <span class="ms-3"><strong>電話：</strong>${submission.phone || '未提供'}</span>
+                                    <span class="ms-3"><strong>信箱：</strong>${submission.email || '未提供'}</span>
+                                </p>
+                                <div class="mb-2">
+                                    <strong>服務需求：</strong>
+                                    ${submission.services && submission.services.length > 0 
+                                        ? submission.services.map(service => `<span class="service-tag">${service}</span>`).join('')
+                                        : '<span class="text-muted">未選擇</span>'
+                                    }
+                                </div>
+                                <p class="mb-0">
+                                    <strong>需求描述：</strong>
+                                    ${submission.requirements ? submission.requirements.substring(0, 100) + (submission.requirements.length > 100 ? '...' : '') : '未提供'}
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <div class="mb-2">
+                                    <small class="text-muted">
+                                        ${new Date(submission.timestamp).toLocaleString('zh-TW')}
+                                    </small>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-success btn-action" onclick="markAsProcessed('${submission.timestamp}')">
+                                        <i class="fas fa-check me-1"></i>標記已處理
+                                    </button>
+                                    <button class="btn btn-sm btn-primary btn-action" onclick="viewDetails('${submission.timestamp}')">
+                                        <i class="fas fa-eye me-1"></i>查看詳情
+                                    </button>
+                                    <button class="btn btn-sm btn-danger btn-action" onclick="deleteSubmission('${submission.timestamp}')">
+                                        <i class="fas fa-trash me-1"></i>刪除
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            markAsProcessed(timestamp) {
+                const submission = this.submissions.find(s => s.timestamp === timestamp);
+                if (submission) {
+                    submission.status = 'processed';
+                    localStorage.setItem('flypig_contact_submissions', JSON.stringify(this.submissions));
+                    this.updateStats();
+                    this.renderSubmissions();
+                }
+            }
+
+            viewDetails(timestamp) {
+                const submission = this.submissions.find(s => s.timestamp === timestamp);
+                if (submission) {
+                    const details = `
+公司名稱：${submission.companyName || '未提供'}
+聯絡人：${submission.contactPerson || '未提供'}
+電子信箱：${submission.email || '未提供'}
+聯絡電話：${submission.phone || '未提供'}
+服務需求：${submission.services ? submission.services.join(', ') : '未選擇'}
+預算範圍：${submission.budget || '未提供'}
+期望時程：${submission.timeline || '未提供'}
+需求描述：
+${submission.requirements || '未提供'}
+提交時間：${new Date(submission.timestamp).toLocaleString('zh-TW')}
+                    `;
+                    alert(details);
+                }
+            }
+
+            deleteSubmission(timestamp) {
+                if (confirm('確定要刪除此筆記錄嗎？')) {
+                    this.submissions = this.submissions.filter(s => s.timestamp !== timestamp);
+                    localStorage.setItem('flypig_contact_submissions', JSON.stringify(this.submissions));
+                    this.updateStats();
+                    this.renderSubmissions();
+                }
+            }
+
+            exportToCSV() {
+                if (this.submissions.length === 0) {
+                    alert('沒有數據可以匯出');
+                    return;
+                }
+
+                const headers = ['提交時間', '公司名稱', '聯絡人', '電子信箱', '聯絡電話', '服務需求', '預算範圍', '期望時程', '需求描述', '狀態'];
+                const csvContent = [
+                    headers.join(','),
+                    ...this.submissions.map(submission => [
+                        new Date(submission.timestamp).toLocaleString('zh-TW'),
+                        `"${submission.companyName || ''}"`,
+                        `"${submission.contactPerson || ''}"`,
+                        `"${submission.email || ''}"`,
+                        `"${submission.phone || ''}"`,
+                        `"${submission.services ? submission.services.join(';') : ''}"`,
+                        `"${submission.budget || ''}"`,
+                        `"${submission.timeline || ''}"`,
+                        `"${(submission.requirements || '').replace(/"/g, '""')}"`,
+                        submission.status
+                    ].join(','))
+                ].join('\n');
+
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', `flypig_contact_submissions_${new Date().toISOString().split('T')[0]}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // 全域函數
+        function refreshData() {
+            window.adminDashboard.loadLocalSubmissions();
+            window.adminDashboard.updateStats();
+            window.adminDashboard.renderSubmissions();
+        }
+
+        function exportToCSV() {
+            window.adminDashboard.exportToCSV();
+        }
+
+        function openGoogleForms() {
+            window.open('https://docs.google.com/forms/d/1nJAbLO50ySDfgodx_SYP3xB-aFzHPcY-Kthaoki67XQ/responses', '_blank');
+        }
+
+        function clearLocalData() {
+            if (confirm('確定要清除所有本地數據嗎？此操作無法復原。')) {
+                localStorage.removeItem('flypig_contact_submissions');
+                window.adminDashboard.loadLocalSubmissions();
+                window.adminDashboard.updateStats();
+                window.adminDashboard.renderSubmissions();
+            }
+        }
+
+        function markAsProcessed(timestamp) {
+            window.adminDashboard.markAsProcessed(timestamp);
+        }
+
+        function viewDetails(timestamp) {
+            window.adminDashboard.viewDetails(timestamp);
+        }
+
+        function deleteSubmission(timestamp) {
+            window.adminDashboard.deleteSubmission(timestamp);
+        }
+
+        // 初始化管理面板
+        document.addEventListener('DOMContentLoaded', () => {
+            window.adminDashboard = new AdminDashboard();
+        });
+    </script>
+</body>
+</html>

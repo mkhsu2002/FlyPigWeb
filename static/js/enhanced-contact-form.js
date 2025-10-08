@@ -234,23 +234,70 @@ class EnhancedContactForm {
     }
 
     async submitFormData(data) {
-        // 這裡可以整合實際的後端 API
-        // 目前使用模擬延遲
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        try {
+            // 初始化後端整合
+            if (!window.FormBackendIntegration) {
+                console.warn('後端整合模組未載入，使用模擬提交');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                console.log('表單數據:', data);
+                return;
+            }
 
-        // 模擬成功回應
-        console.log('表單數據:', data);
+            // 使用後端整合提交
+            const backend = new FormBackendIntegration();
+            const results = await backend.submitForm(data);
+            
+            console.log('表單提交結果:', results);
+            
+            // 記錄提交成功的統計
+            this.logSubmissionStats(data, results);
+            
+        } catch (error) {
+            console.error('表單提交錯誤:', error);
+            
+            // 如果所有方式都失敗，至少記錄數據
+            this.fallbackDataLog(data);
+            throw error;
+        }
+    }
+
+    logSubmissionStats(formData, results) {
+        // 發送 Google Analytics 事件
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'form_submit_success', {
+                event_category: 'Contact',
+                event_label: 'Business Inquiry',
+                value: results.length,
+                custom_parameter_services: formData.services ? formData.services.join(',') : '',
+                custom_parameter_company: formData.companyName || ''
+            });
+        }
+    }
+
+    fallbackDataLog(formData) {
+        // 在控制台記錄數據，以便手動處理
+        console.group('📋 表單提交數據（備用記錄）');
+        console.log('提交時間:', new Date().toLocaleString('zh-TW'));
+        console.log('公司名稱:', formData.companyName);
+        console.log('聯絡人:', formData.contactPerson);
+        console.log('電子信箱:', formData.email);
+        console.log('聯絡電話:', formData.phone);
+        console.log('服務需求:', formData.services);
+        console.log('預算範圍:', formData.budget);
+        console.log('期望時程:', formData.timeline);
+        console.log('需求描述:', formData.requirements);
+        console.groupEnd();
         
-        // 在實際應用中，這裡會發送數據到後端
-        // const response = await fetch('/api/contact', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(data)
-        // });
+        // 可以考慮將數據存儲到 localStorage 作為備用
+        const fallbackData = {
+            ...formData,
+            timestamp: new Date().toISOString(),
+            status: 'pending_manual_review'
+        };
         
-        // if (!response.ok) {
-        //     throw new Error('提交失敗');
-        // }
+        const existingData = JSON.parse(localStorage.getItem('flypig_contact_submissions') || '[]');
+        existingData.push(fallbackData);
+        localStorage.setItem('flypig_contact_submissions', JSON.stringify(existingData.slice(-10))); // 只保留最近10筆
     }
 
     setLoadingState(loading) {
