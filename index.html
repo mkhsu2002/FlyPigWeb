@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="FlyPig AI - 專業企業AI與Martech解決方案 | 智能客服·電商AI·社群自動化">
+    <meta name="description" content="🚀 FlyPig AI 提供企業級AI建置服務：LLM智能客服機器人、電商AI影像生成、社群行銷自動化、AI KOL訂製。10年+產業經驗，助力中小企業數位轉型，站在AI浪潮最前端。立即諮詢！">
+    <meta name="keywords" content="企業AI,Martech,電商AI,智能客服,Line Bot,AI聊天機器人,影像生成,社群自動化,數位轉型,AI顧問,台灣AI,LLM,GPT,AI建置,行銷科技,FlyPig AI,艾可開發">
+    <meta name="author" content="FlyPig AI - 艾可開發AI業務部">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="zh-TW">
+    <meta name="geo.region" content="TW">
+    <meta name="geo.placename" content="Taiwan">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="FlyPig AI">
+    <meta property="og:title" content="FlyPig AI - 專業企業AI與Martech解決方案供應商">
+    <meta property="og:description" content="提供企業級AI建置服務：智能客服、電商AI影像生成、社群行銷自動化。10年+產業經驗，助力企業數位轉型。">
+    <meta property="og:image" content="https://mkhsu2002.github.io/FlyPigWeb/static/images/flypig-ai-enterprise-logo.jpg">
+    <meta property="og:image:alt" content="FlyPig AI - 企業AI解決方案專家">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://mkhsu2002.github.io/FlyPigWeb/">
+    <meta property="og:locale" content="zh_TW">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FlyPig AI - 專業企業AI與Martech解決方案">
+    <meta name="twitter:description" content="提供企業級AI建置服務：智能客服、電商AI、社群自動化。10年+產業經驗。">
+    <meta name="twitter:image" content="https://mkhsu2002.github.io/FlyPigWeb/static/images/flypig-ai-enterprise-logo.jpg">
+    <meta name="twitter:site" content="@FlyPigAI">
+    <meta name="twitter:creator" content="@FlyPigAI">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mkhsu2002.github.io/FlyPigWeb/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/images/flypig-ai-enterprise-logo.jpg">
+    <link rel="apple-touch-icon" href="static/images/flypig-ai-enterprise-logo.jpg">
+    
+    <title>FlyPig AI - 專業企業AI與Martech解決方案 | 智能客服·電商AI·社群自動化</title>
+    
+    <!-- Bootstrap CSS -->
+
+    <!-- 結構化資料 Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FlyPig AI",
+      "alternateName": "小飛豬AI",
+      "description": "專業的企業AI與Martech解決方案供應商，提供智能客服、電商AI、社群自動化等服務",
+      "url": "https://mkhsu2002.github.io/FlyPigWeb/",
+      "logo": "https://mkhsu2002.github.io/FlyPigWeb/static/images/flypig-ai-enterprise-logo.jpg",
+      "image": "https://mkhsu2002.github.io/FlyPigWeb/static/images/flypig-ai-enterprise-logo.jpg",
+      "foundingDate": "2024",
+      "foundingLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "TW",
+          "addressRegion": "台灣"
+        }
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "sales@icareu.tw",
+        "availableLanguage": ["zh-TW", "en", "ja"],
+        "areaServed": "TW"
+      },
+      "sameAs": [
+        "https://www.facebook.com/FlyPigAI",
+        "https://github.com/mkhsu2002"
+      ],
+      "knowsAbout": [
+        "人工智能",
+        "機器學習",
+        "自然語言處理",
+        "智能客服",
+        "行銷科技",
+        "電商AI",
+        "社群自動化"
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "LLM強化 AI Line Bot",
+            "description": "打造個性化智能Line聊天機器人，提供即時客戶服務與互動體驗"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "智能客服機器人",
+            "description": "企業級AI客服系統，提供24/7全天候服務"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "電商AI影像生成",
+            "description": "專業的martech影像服務，為商品創造吸睛的視覺內容"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI KOL訂製",
+            "description": "打造專屬虛擬網紅與數位克隆"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "多智能體策略決策會議",
+            "description": "讓多角色AI協同作業，提供多維度分析與決策建議"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "社群行銷自動化",
+            "description": "整合AI應用的社群管理系統，實現數位行銷轉型"
+          }
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "50",
+        "bestRating": "5"
+      }
+    }
+    </script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="static/images/flypig-ai-enterprise-logo.jpg" alt="FlyPig AI Logo - 專業企業AI與Martech解決方案供應商" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                FlyPig AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#vision">願景</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">服務</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mkhsu2002" target="_blank">GitHub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">聯絡我們</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="https://www.facebook.com/FlyPigAI" target="_blank">
+                            <i class="fab fa-facebook-f me-2"></i>追蹤 FlyPig FB
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section" style="background-image: url('static/images/ai-martech-solutions-hero-background.svg');" aria-label="FlyPig AI 企業AI解決方案 - 首頁橫幅">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1>AI 賦能，助您起飛</h1>
+                    <p class="lead">打造智能未來，實現無限可能</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision" class="vision-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <img src="static/images/flypig-ai-enterprise-logo.jpg" alt="FlyPig AI 企業標誌 - 用AI助您起飛" class="img-fluid rounded" width="200" height="200" style="width: 200px; height: 200px; object-fit: cover;">
+                    <div class="vision-stats mt-4">
+                        <div class="row">
+                            <div class="col-4 text-center">
+                                <h3 class="vision-number">10年+</h3>
+                                <p>產業實務</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <h3 class="vision-number">24/7</h3>
+                                <p>全天候服務</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <h3 class="vision-number">99%</h3>
+                                <p>客戶滿意度</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h2>企業理念</h2>
+                    <p>FlyPig AI 以「用AI助你起飛」為核心理念，致力於為新創企業及中小型企業提供經濟高效的AI解決方案。我們專注於智能客服機器人、AI影像生成、社群自動化、虛擬網紅、數位虛擬人等服務，並提供量身打造的模型訓練及自有模型研發。我們相信，AI的力量不僅在於技術，更在於將創的創意轉化為現實。我們的團隊秉持創新精神，為每位客戶量身打造適合的解決方案，幫助企業在數位時代中脫穎而出。</p>
+                    <p>選擇 FlyPig AI，讓我們成為您的智慧夥伴，共同打造智能未來，實現無限可能！</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">團隊介紹</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <p class="team-description">
+                        FlyPig AI 源自艾可開發公司的內部IT部門，為因應業務需求而誕生的AI創新團隊。艾可開發作為深耕電子商務超過十餘年的資深電商公司，累積了豐富的產業經驗與技術實力。在數位轉型的浪潮中，我們看見AI技術為企業帶來的無限可能，因此成立FlyPig AI，期望將這份經驗與創新能量分享給更多企業夥伴。
+                    </p>
+                    <p class="team-description">
+                        承襲艾可開發的專業精神，我們致力於為客戶打造最適合的AI解決方案。我們深知每個企業都有其獨特的需求與挑戰，因此我們的服務不僅止於技術的提供，更重視與客戶的深度合作，共同探索AI應用的創新可能。
+                    </p>
+                    <div class="mt-4">
+                        <a href="https://www.icareushop.com.tw/" target="_blank" class="parent-company-link">
+                            了解更多艾可開發
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left">
+                    <div class="team-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-code"></i>
+                            <h4>技術實力</h4>
+                            <p>擁有超過十年的電商技術開發經驗</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>創新思維</h4>
+                            <p>持續探索AI應用的無限可能</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-handshake"></i>
+                            <h4>深度合作</h4>
+                            <p>重視與客戶的長期夥伴關係</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section" aria-label="AI應用服務">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">企業AI解決方案</h2>
+            <div class="row">
+                <div class="col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+                    <article class="service-card">
+                        <i class="fab fa-line" aria-hidden="true"></i>
+                        <h3>LLM強化 AI Line Bot</h3>
+                        <p>打造個性化智能Line聊天機器人，提供即時客戶服務與互動體驗</p>
+                        <div class="mt-3">
+                            <a href="line-bot-service.html" class="btn btn-outline-primary btn-sm">了解更多</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+                    <article class="service-card">
+                        <i class="fas fa-robot" aria-hidden="true"></i>
+                        <h3>智能客服機器人</h3>
+                        <p>企業級AI客服系統，提供24/7全天候服務，大幅提升客戶滿意度與轉換率</p>
+                    </article>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+                    <article class="service-card">
+                        <i class="fas fa-image" aria-hidden="true"></i>
+                        <h3>電商AI影像生成</h3>
+                        <p>專業的martech影像服務，為您的商品創造吸睛的視覺內容</p>
+                    </article>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="400">
+                    <article class="service-card">
+                        <i class="fas fa-user-astronaut" aria-hidden="true"></i>
+                        <h3>AI KOL訂製</h3>
+                        <p>打造專屬虛擬網紅與數位克隆，為品牌創造獨特個性與IP價值</p>
+                    </article>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="500">
+                    <article class="service-card">
+                        <i class="fas fa-brain" aria-hidden="true"></i>
+                        <h3>多智能體策略決策會議</h3>
+                        <p>讓多角色AI協同作業，為您的企業挑戰提供多維度分析與決策建議</p>
+                    </article>
+                </div>
+                <div class="col-lg-4 mb-4" data-aos="zoom-in" data-aos-delay="600">
+                    <article class="service-card">
+                        <i class="fas fa-share-nodes" aria-hidden="true"></i>
+                        <h3>社群行銷自動化</h3>
+                        <p>整合AI應用的社群管理系統，實現數位行銷轉型</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="case-studies" class="portfolio-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">深入案例研究</h2>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-card">
+                        <div class="portfolio-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>智慧客服升級</h3>
+                        <p class="client">品牌電商 A 公司</p>
+                        <div class="achievement">
+                            <ul>
+                                <li>客服響應時間減少 60%</li>
+                                <li>顧客滿意度提升 35%</li>
+                                <li>24/7 全天候服務</li>
+                            </ul>
+                            <div class="mt-3">
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#caseStudy1">
+                                    查看完整案例
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="portfolio-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h3>品牌視覺革新</h3>
+                        <p class="client">庇護工場 B 公司</p>
+                        <div class="achievement">
+                            <ul>
+                                <li>產品視覺提升帶動銷售增長 120%</li>
+                                <li>創意內容觸及率提升 85%</li>
+                                <li>降低 60% 行銷製作成本</li>
+                            </ul>
+                            <button class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#caseStudy2">
+                                查看詳情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-card">
+                        <div class="portfolio-icon">
+                            <i class="fas fa-share-nodes"></i>
+                        </div>
+                        <h3>社群經營突破</h3>
+                        <p class="client">戶外品牌 C 公司</p>
+                        <div class="achievement">
+                            <ul>
+                                <li>社群貼文互動提升 90%</li>
+                                <li>粉絲成長速度增加 70%</li>
+                                <li>品牌聲量提升 55%</li>
+                            </ul>
+                            <button class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#caseStudy3">
+                                查看詳情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Modals -->
+    <div class="modal fade" id="caseStudy1" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">智慧客服升級：電商龍頭轉型之路</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="case-study-content">
+                        <h6 class="section-title">客戶背景</h6>
+                        <p>深根台灣電商業務十餘年，A公司長年代理與經銷數個品牌，於協助品牌於全台各大虛實通路上架銷售。在快速成長的電商浪潮中，其每日面對數以萬計的客戶查詢，傳統人工客服系統已無法因應這樣的成長速度。</p>
+                        
+                        <h6 class="section-title">面臨挑戰</h6>
+                        <ul>
+                            <li>每日超過10,000次的多元客戶查詢需求</li>
+                            <li>客服響應時間平均超過30分鐘，影響客戶體驗</li>
+                            <li>客服人員工作負荷已達極限，離職率高</li>
+                            <li>夜間及假日服務品質不穩定</li>
+                            <li>大量重複性問題佔用人力資源</li>
+                        </ul>
+                        
+                        <h6 class="section-title">解決方案</h6>
+                        <p>FlyPig AI 為客戶量身打造新世代智慧客服系統：</p>
+                        <ul>
+                            <li>進階自然語言處理引擎，精準理解90%以上客戶意圖</li>
+                            <li>智能知識庫自動更新機制，持續學習新知識</li>
+                            <li>多語言即時翻譯系統，支援中英日韓等語言</li>
+                            <li>情緒識別與人工智能轉接機制，處理特殊需求</li>
+                            <li>智能銷售機會識別系統，提升交叉銷售效果</li>
+                            <li>全方位數據分析儀表板，即時監控服務品質</li>
+                        </ul>
+                        
+                        <h6 class="section-title">實施過程</h6>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <span class="date">第一階段：基礎建設</span>
+                                <p>系統架構規劃、資料庫整合、API介接</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="date">第二階段：AI培訓</span>
+                                <p>模型訓練、知識庫建立、情境測試</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="date">第三階段：優化升級</span>
+                                <p>系統上線、效能調校、持續改進</p>
+                            </div>
+                        </div>
+                        
+                        <h6 class="section-title">具體成效</h6>
+                        <div class="results">
+                            <div class="result-item">
+                                <i class="fas fa-clock"></i>
+                                <p>平均響應時間從30分鐘縮短至30秒，提升60倍效率</p>
+                            </div>
+                            <div class="result-item">
+                                <i class="fas fa-smile"></i>
+                                <p>客戶滿意度從65%提升至88%，成長35%</p>
+                            </div>
+                            <div class="result-item">
+                                <i class="fas fa-chart-line"></i>
+                                <p>人均客服效率提升300%，大幅降低人力成本</p>
+                            </div>
+                            <div class="result-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <p>每月節省超過100萬營運成本</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="caseStudy2" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">品牌視覺革新：公益產品的數位轉型</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="case-study-content">
+                        <h6 class="section-title">客戶背景</h6>
+                        <p>B公司是台灣在地的庇護工場，專注於協助身心障礙朋友自立就業。工場生產的手工藝品與農產加工品雖然品質優良，但在傳統實體通路的銷售管道有限，且缺乏專業的視覺行銷資源，使得優質商品難以觸及更廣大的消費群。</p>
+                        
+                        <h6 class="section-title">面臨挑戰</h6>
+                        <ul>
+                            <li>產品視覺呈現不夠專業，影響網路銷售成效</li>
+                            <li>專業攝影成本過高，非庇護工場預算所及</li>
+                            <li>缺乏社群媒體經營資源，曝光管道受限</li>
+                            <li>商品故事難以有效傳達給消費者</li>
+                            <li>電商平台經營經驗不足，資源有限</li>
+                            <li>需要大量且多樣化的視覺內容</li>
+                        </ul>
+                        
+                        <h6 class="section-title">解決方案</h6>
+                        <p>FlyPig AI 提供公益導向的AI視覺創作方案，協助庇護工場產品轉型：</p>
+                        <ul>
+                            <li>公益產品特色突顯系統，展現手作溫度與質感</li>
+                            <li>智能商品敘事引擎，傳達產品背後的社會意義</li>
+                            <li>多平台視覺優化工具，提升電商曝光效果</li>
+                            <li>社群內容生成系統，豐富行銷素材</li>
+                            <li>品牌故事自動生成，強化情感連結</li>
+                            <li>公益企業專屬視覺資料庫，降低營運成本</li>
+                        </ul>
+                        
+                        <h6 class="section-title">實施過程</h6>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <span class="date">第一階段：需求分析</span>
+                                <p>了解庇護工場特色、產品故事、銷售痛點</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="date">第二階段：系統優化</span>
+                                <p>調校AI模型、建立公益導向視覺庫</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="date">第三階段：全面整合</span>
+                                <p>電商優化、社群經營、成效追蹤</p>
+                            </div>
+                        </div>
+                        
+                        <h6 class="section-title">具體成效</h6>
+                        <div class="results">
+                            <div class="result-item">
+                                <i class="fas fa-heart"></i>
+                                <p>產品銷售額成長120%，擴大社會影響力</p>
+                            </div>
+                            <div class="result-item">
+                                <i class="fas fa-users"></i>
+                                <p>社群觸及率提升85%，提高公益能見度</p>
+                            </div>
+                            <div class="result-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <p>行銷成本降低60%，增加庇護員工收入</p>
+                            </div>
+                            <div class="result-item">
+                                <i class="fas fa-store"></i>
+                                <p>成功打入3大電商平台，拓展銷售通路</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="caseStudy3" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">社群經營突破：餐飲集團的數位轉型</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="case-study-content">
+                        <h6 class="section-title">客戶背景</h6>
+                        <p>C公司是台灣知名的戶外運動品牌，專注於提供高品質的戶外運動裝備與服飾。該品牌需要在多個社群平台上展示產品特色、分享戶外活動資訊，並建立活躍的戶外運動社群。</p>
+                        
+                        <h6 class="section-title">面臨挑戰</h6>
+                        <ul>
+                            <li>需要持續產出專業的戶外運動內容</li>
+                            <li>社群內容創作與管理成本高</li>
+                            <li>跨平台互動率不穩定</li>
+                            <li>品牌專業形象需要強化</li>
+                            <li>戶外活動社群經營待突破</li>
+                        </ul>
+                        
+                        <h6 class="section-title">解決方案</h6>
+                        <p>FlyPig AI 提供整合性社群自動化方案：</p>
+                        <ul>
+                            <li>AI文案生成系統</li>
+                            <li>智能排程發文功能</li>
+                            <li>跨平台內容同步工具</li>
+                            <li>互動數據分析儀表板</li>
+                            <li>輿情監測與分析系統</li>
+                        </ul>
+                        
+                        <h6 class="section-title">實施過程</h6>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <span class="date">第一階段</span>
+                                <p>品牌語調學習與模型訓練</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="date">第二階段</span>
+                                <p>自動化系統建置</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="date">第三階段</span>
+                                <p>多平台整合與優化</p>
+                            </div>
+                        </div>
+                        
+                        <h6 class="section-title">具體成效</h6>
+                        <div class="results">
+                            <div class="result-item">
+                                <i class="fas fa-comments"></i>
+                                <p>社群互動率提升90%</p>
+                            </div>
+                            <div class="result-item">
+                                <i class="fas fa-users"></i>
+                                <p>粉絲成長速度增加70%</p>
+                            </div>
+                            <div class="result-item">
+                                <i class="fas fa-bullhorn"></i>
+                                <p>品牌聲量提升55%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section" style="background-image: url('https://images.unsplash.com/photo-1463620695885-8a91d87c53d0');">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="contact-form-container">
+                        <h2 class="text-center mb-4">聯絡我們</h2>
+                        <!-- 嵌入的 Google 表單，使用自定義樣式 -->
+                        <div class="google-form-wrapper mb-4">
+                            <iframe src="https://docs.google.com/forms/d/1nJAbLO50ySDfgodx_SYP3xB-aFzHPcY-Kthaoki67XQ/viewform?embedded=true" 
+                                class="google-form-embed" frameborder="0" marginheight="0" marginwidth="0">載入中…</iframe>
+                        </div>
+                        
+                        <!-- 移除了聯絡資訊區塊，避免與頁腳重複 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-2">專業的企業AI與Martech整合服務供應商</p>
+                    <p class="mb-2">智能客服 | 電商AI應用 | 社群行銷自動化</p>
+                    <p class="mb-2">業務洽詢: sales@icareu.tw / LINE ID: @icareutw</p>
+                    <p class="mb-2">&copy; 2024 FlyPig AI - 艾可開發AI業務部. All rights reserved.</p>
+                    <p class="mt-2">＊本頁面完全透過與 AI 對話生成。</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast 通知 -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="formToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">FlyPig AI</strong>
+                <small>訊息通知</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                感謝您的訊息！我們將盡快回覆您。
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Flask
+instance/
+.webassets-cache
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 轉換腳本產生的臨時文件
+convert_to_static.py
+
+# 不需要的部署文件（GitHub Pages 不需要）
+main.py
+Dockerfile
+*.nix
+replit.nix
+.replit
+pyproject.toml
+uv.lock
+babel.cfg
+messages.pot
+
+# 多語言文件（已決定只使用中文）
+translations/
+
+# 部署指南（保留在 repo 但不影響網站）
+# deployment_guide.md
+# deployment_guide_docker.md

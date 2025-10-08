@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    
+    <!-- 首頁 -->
+    <url>
+        <loc>https://mkhsu2002.github.io/FlyPigWeb/</loc>
+        <lastmod>2025-10-08</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://mkhsu2002.github.io/FlyPigWeb/static/images/flypig-ai-enterprise-logo.jpg</image:loc>
+            <image:title>FlyPig AI 企業 Logo</image:title>
+            <image:caption>FlyPig AI - 專業的企業AI與Martech解決方案供應商</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Line Bot 服務頁 -->
+    <url>
+        <loc>https://mkhsu2002.github.io/FlyPigWeb/line-bot-service.html</loc>
+        <lastmod>2025-10-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+</urlset>

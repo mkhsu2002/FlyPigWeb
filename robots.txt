@@ -1,0 +1,29 @@
+# robots.txt for FlyPig AI Website
+# https://mkhsu2002.github.io/FlyPigWeb/
+
+User-agent: *
+Allow: /
+Allow: /static/
+Allow: /static/css/
+Allow: /static/js/
+Allow: /static/images/
+
+Disallow: /templates/
+Disallow: /*.py$
+Disallow: /attached_assets/
+
+# 優先爬取重要頁面
+Crawl-delay: 1
+
+# Sitemap 位置
+Sitemap: https://mkhsu2002.github.io/FlyPigWeb/sitemap.xml
+
+# 特定搜尋引擎規則
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /

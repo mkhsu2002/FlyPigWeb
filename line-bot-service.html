@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="LLM強化 AI Line Bot 客製化服務 | FlyPig AI 智能聊天機器人專家">
+    <meta name="description" content="🤖 FlyPig AI 提供企業級 Line Bot 客製化開發：LLM技術驅動、深度客製化、24/7智能客服。成功案例：小艾、小天、小咖、阿昌。立即體驗AI聊天機器人的強大功能！">
+    <meta name="keywords" content="Line Bot,AI聊天機器人,LLM,GPT,智能客服,客製化Line Bot,企業AI,數位轉型,自然語言處理,對話AI,FlyPig AI,台灣Line Bot,AI客服系統">
+    <meta name="author" content="FlyPig AI - 艾可開發AI業務部">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="LLM強化 AI Line Bot 客製化服務 - FlyPig AI">
+    <meta property="og:description" content="企業級 Line Bot 開發：LLM技術驅動、深度客製化、智能客服。立即體驗！">
+    <meta property="og:image" content="https://mkhsu2002.github.io/FlyPigWeb/static/images/flypig-ai-enterprise-logo.jpg">
+    <meta property="og:url" content="https://mkhsu2002.github.io/FlyPigWeb/line-bot-service.html">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LLM強化 AI Line Bot - FlyPig AI">
+    <meta name="twitter:description" content="企業級 Line Bot 客製化開發服務">
+    <meta name="twitter:image" content="https://mkhsu2002.github.io/FlyPigWeb/static/images/flypig-ai-enterprise-logo.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mkhsu2002.github.io/FlyPigWeb/line-bot-service.html">
+    
+    <title>LLM強化 AI Line Bot 客製化服務 | FlyPig AI 智能聊天機器人專家</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        .service-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1611162618758-0273bf519d45');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0 100px;
+            margin-top: 56px;
+        }
+        
+        .features-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .case-study {
+            padding: 80px 0;
+        }
+        
+        .case-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .case-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .case-content {
+            padding: 25px;
+        }
+        
+        .case-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .line-button {
+            background-color: #06C755;
+            color: white;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .line-button:hover {
+            background-color: #05a848;
+            color: white;
+        }
+        
+        .tech-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+        }
+        
+        .tech-item {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .applications-section {
+            padding: 80px 0;
+        }
+        
+        .app-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .app-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="static/images/flypig-ai-enterprise-logo.jpg" alt="FlyPig AI Logo - 企業AI與Martech解決方案專家" width="40" height="40" style="border-radius: 50%; object-fit: cover;">
+                FlyPig AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#services">服務</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/mkhsu2002" target="_blank">GitHub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">聯絡我們</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="https://www.facebook.com/FlyPigAI" target="_blank">
+                            <i class="fab fa-facebook-f me-2"></i>追蹤 FlyPig FB
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Service Hero Section -->
+    <section class="service-hero">
+        <div class="container text-center">
+            <h1 data-aos="fade-up">LLM強化 AI Line Bot</h1>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">智能聊天機器人客製化服務</p>
+            <div class="mt-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="index.html#contact" class="btn btn-primary me-2">
+                    <i class="fas fa-paper-plane me-2"></i>諮詢服務
+                </a>
+                <a href="#case-studies" class="btn btn-outline-light">
+                    <i class="fas fa-arrow-down me-2"></i>查看案例
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">服務特色</h2>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>LLM技術驅動</h3>
+                        <p>採用最新大型語言模型技術，讓機器人能夠理解複雜的自然語言，提供流暢且人性化的對話體驗。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>深度客製化</h3>
+                        <p>根據企業獨特需求和品牌形象，打造符合企業文化的聊天機器人角色，提供量身定制的使用者體驗。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>數據驅動優化</h3>
+                        <p>透過深度分析對話數據，持續提升機器人的回應質量，推動客戶服務系統不斷進化，提高客戶滿意度。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>多重安全保障</h3>
+                        <p>嚴格的數據安全措施確保敏感信息保密，採用最高標準的授權與認證系統，保護企業與客戶的數據安全。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>快速部署上線</h3>
+                        <p>高效的導入流程，從需求確認到部署上線，專業團隊全程協助，確保系統平穩無縫切換。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>持續升級支持</h3>
+                        <p>提供長期技術支持和定期功能更新，讓您的聊天機器人始終保持在最佳狀態，與時俱進。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="tech-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">核心技術</h2>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h4>大型語言模型(LLM)</h4>
+                        <p>整合最先進的LLM技術，實現更自然、更智能的人機對話。</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>知識庫融合系統</h4>
+                        <p>結合企業專屬知識庫，讓機器人能精準回答領域內專業問題。</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h4>自然語言處理</h4>
+                        <p>深度理解用戶意圖和上下文，提供準確且相關的回應。</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="tech-item">
+                        <div class="tech-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>情感智能識別</h4>
+                        <p>識別用戶情緒，提供合適的回應，增強用戶體驗。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section class="applications-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">應用場景</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>電子商務</h3>
+                        <p>24/7全天候客服，處理訂單查詢、產品推薦、售後服務等需求。顧客可隨時獲得即時協助，提升購物體驗和轉換率。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>金融服務</h3>
+                        <p>提供賬戶查詢、理財建議、常見問題解答等服務，降低客服中心負荷，同時保障用戶信息安全。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>教育培訓</h3>
+                        <p>作為學習助手回答學生問題，提供學習資源和指導，創造互動式學習體驗，提高學習效率。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>醫療健康</h3>
+                        <p>提供基礎健康諮詢、預約管理、醫療知識普及等服務，提升醫患溝通效率，改善醫療體驗。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>餐飲服務</h3>
+                        <p>協助處理線上訂餐、菜單查詢、推薦菜品、訂位管理等服務，提高營運效率並提升顧客滿意度。</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3>環保與公益</h3>
+                        <p>打造富有個性的公益大使，傳播環保理念和社會公益資訊，增強公眾參與度和品牌公益形象。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="case-studies" class="case-study">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">成功案例</h2>
+            <div class="row">
+                <!-- Case 1 -->
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="case-card">
+                        <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f')"></div>
+                        <div class="case-content">
+                            <h3>艾可智能小編 - 小艾</h3>
+                            <p>為艾可開發公司打造的智能客服小編，協助處理客戶諮詢、提供產品資訊以及解決常見問題。小艾不僅能夠即時回應客戶需求，更成為公司品牌形象的重要代表。</p>
+                            <p><strong>成效:</strong> 客服響應時間縮短75%，客戶滿意度提升30%，成功處理90%以上的常見問題。</p>
+                            <a href="https://lin.ee/87JgLwA" target="_blank" class="btn line-button">
+                                <i class="fab fa-line me-2"></i>加入好友體驗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Case 2 -->
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="case-card">
+                        <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1511497584788-876760111969')"></div>
+                        <div class="case-content">
+                            <h3>森林保育員 - 小天</h3>
+                            <p>為環保組織開發的AI公益大使，專注於森林保育知識傳播、棲地保護資訊分享以及志工招募。小天通過互動式對話，引導公眾了解森林保育的重要性，並鼓勵參與相關活動。</p>
+                            <p><strong>成效:</strong> 環保知識傳播覆蓋增加150%，志工報名率提升60%，社群互動增加200%。</p>
+                            <a href="https://lin.ee/nrsS6J2" target="_blank" class="btn line-button">
+                                <i class="fab fa-line me-2"></i>加入好友體驗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Case 3 -->
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="case-card">
+                        <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1509042239860-f0b0c7c2d754')"></div>
+                        <div class="case-content">
+                            <h3>咖啡師 - 小咖</h3>
+                            <p>為精品咖啡連鎖店設計的虛擬咖啡顧問，能夠提供咖啡知識、沖煮技巧、產品推薦以及門市資訊。小咖不僅是一個服務工具，更是品牌建立與顧客的情感連結橋梁。</p>
+                            <p><strong>成效:</strong> 會員轉換率提升45%，門市訪問量增加35%，顧客回購率提高25%。</p>
+                            <a href="https://lin.ee/eQ8jmNJ" target="_blank" class="btn line-button">
+                                <i class="fab fa-line me-2"></i>加入好友體驗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Case 4 -->
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="case-card">
+                        <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998')"></div>
+                        <div class="case-content">
+                            <h3>公益大使 - 阿昌</h3>
+                            <p>為社會企業打造的公益推廣大使，專注於社會議題宣導、捐款資訊提供以及公益活動推廣。阿昌通過生動活潑的對話方式，讓抽象的公益理念變得易於理解和親近。</p>
+                            <p><strong>成效:</strong> 公益活動參與度提升80%，捐款轉換率增加50%，品牌知名度提高40%。</p>
+                            <a href="https://lin.ee/qlE0Yjc" target="_blank" class="btn line-button">
+                                <i class="fab fa-line me-2"></i>加入好友體驗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section bg-primary text-white py-5">
+        <div class="container text-center">
+            <h2 data-aos="fade-up">準備好讓您的企業服務升級了嗎？</h2>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">立即與我們聯繫，探討如何為您的企業打造專屬AI Line Bot</p>
+            <div class="mt-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="index.html#contact" class="btn btn-light">
+                    <i class="fas fa-envelope me-2"></i>聯絡我們
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>FlyPig AI</h5>
+                    <p>專業的企業AI與Martech解決方案提供商</p>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>服務項目</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="line-bot-service.html" class="text-white">LLM強化 AI Line Bot</a></li>
+                        <li><a href="index.html#services" class="text-white">智能客服機器人</a></li>
+                        <li><a href="index.html#services" class="text-white">電商AI影像生成</a></li>
+                        <li><a href="index.html#services" class="text-white">AI KOL訂製</a></li>
+                        <li><a href="index.html#services" class="text-white">多智能體策略決策會議</a></li>
+                        <li><a href="index.html#services" class="text-white">社群行銷自動化</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>聯絡資訊</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> info@flypigai.com</li>
+                        <li><i class="fas fa-phone me-2"></i> (02) 1234-5678</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> 台北市信義區松高路1號</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0">&copy; 2025 FlyPig AI. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+</body>
+</html>
