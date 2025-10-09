@@ -291,14 +291,14 @@ class EnhancedContactForm {
             
             // 使用實際的欄位映射
             const fieldMapping = {
-                companyName: 'entry.1716438352',
-                contactPerson: 'entry.2095342285',
-                email: 'entry.1347829561',
-                phone: 'entry.222074440',
-                services: 'entry.451838095',
-                budget: 'entry.1405852956',
-                timeline: 'entry.1005380456',
-                requirements: 'entry.1408160052'
+                companyName: 'entry.1005380456',
+                contactPerson: 'entry.1347829561',
+                email: 'entry.1405852956',
+                phone: 'entry.1408160052',
+                services: 'entry.1716438352',
+                budget: 'entry.2095342285',
+                timeline: 'entry.222074440',
+                requirements: 'entry.451838095'
             };
 
             const googleFormData = new FormData();

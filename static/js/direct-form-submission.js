@@ -10,14 +10,14 @@ class DirectFormSubmission {
         
         // 實際的欄位映射
         this.fieldMapping = {
-            companyName: 'entry.1716438352',      // 公司名稱
-            contactPerson: 'entry.2095342285',    // 聯絡人姓名
-            email: 'entry.1347829561',            // 電子信箱
-            phone: 'entry.222074440',            // 聯絡電話
-            services: 'entry.451838095',         // 感興趣的服務
-            budget: 'entry.1405852956',           // 預算範圍
-            timeline: 'entry.1005380456',         // 期望完成時間
-            requirements: 'entry.1408160052'      // 詳細需求描述
+            companyName: 'entry.1005380456',      // 公司名稱
+            contactPerson: 'entry.1347829561',    // 聯絡人姓名
+            email: 'entry.1405852956',            // 電子信箱
+            phone: 'entry.1408160052',            // 聯絡電話
+            services: 'entry.1716438352',         // 感興趣的服務
+            budget: 'entry.2095342285',           // 預算範圍
+            timeline: 'entry.222074440',         // 期望完成時間
+            requirements: 'entry.451838095'      // 詳細需求描述
         };
     }
 
