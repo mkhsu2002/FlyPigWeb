@@ -81,25 +81,29 @@ class FormBackendIntegration {
     convertToGoogleFormsFormat(formData) {
         const googleData = {};
         
-        // 基於常見的 Google Forms 欄位命名規則
-        // 這些是估計的欄位名稱，實際可能需要調整
+        // 使用實際的 Google Forms 欄位名稱
         const fieldMapping = {
-            companyName: 'entry.1000000',      // 公司名稱
-            contactPerson: 'entry.1000001',    // 聯絡人姓名
-            email: 'entry.1000002',            // 電子信箱
-            phone: 'entry.1000003',            // 聯絡電話
-            services: 'entry.1000004',         // 感興趣的服務（複選框）
-            budget: 'entry.1000005',           // 預算範圍
-            timeline: 'entry.1000006',         // 期望完成時間
-            requirements: 'entry.1000007'      // 詳細需求描述
+            companyName: 'entry.1716438352',      // 公司名稱
+            contactPerson: 'entry.2095342285',    // 聯絡人姓名
+            email: 'entry.1347829561',            // 電子信箱
+            phone: 'entry.222074440',            // 聯絡電話
+            services: 'entry.451838095',         // 感興趣的服務（複選框）
+            budget: 'entry.1405852956',           // 預算範圍
+            timeline: 'entry.1005380456',         // 期望完成時間
+            requirements: 'entry.1408160052'      // 詳細需求描述
         };
         
         // 基本資料對應
         Object.entries(fieldMapping).forEach(([dataKey, fieldName]) => {
             if (dataKey === 'services' && Array.isArray(formData[dataKey])) {
-                // 處理複選框服務選擇
-                formData[dataKey].forEach((service, index) => {
-                    googleData[`${fieldName}_${index}`] = service;
+                // 處理複選框服務選擇 - 複選框使用相同的 entry 名稱，但每個選項都要提交
+                formData[dataKey].forEach((service) => {
+                    // 對於複選框，我們需要添加一個隱藏的 sentinel 欄位
+                    googleData[`${fieldName}_sentinel`] = ''; // 添加 sentinel 欄位
+                });
+                // 然後添加實際的服務選擇
+                formData[dataKey].forEach((service) => {
+                    googleData[fieldName] = service;
                 });
             } else if (formData[dataKey] !== undefined && formData[dataKey] !== '') {
                 googleData[fieldName] = formData[dataKey];

@@ -60,12 +60,60 @@ class SimpleFormSubmission {
     }
 
     sendViaMailto(formData) {
-        // 取消自動開啟郵件客戶端
-        console.log('表單數據已收集，但不自動開啟郵件客戶端');
-        console.log('表單數據:', formData);
-        
-        // 可以選擇顯示提示訊息
-        alert('表單提交成功！我們將透過其他方式與您聯繫。');
+        // 嘗試直接提交到 Google Forms
+        this.submitToGoogleFormsDirectly(formData);
+    }
+
+    async submitToGoogleFormsDirectly(formData) {
+        try {
+            // 使用實際的 Google Forms 欄位名稱
+            const fieldMapping = {
+                companyName: 'entry.1716438352',      // 公司名稱
+                contactPerson: 'entry.2095342285',    // 聯絡人姓名
+                email: 'entry.1347829561',            // 電子信箱
+                phone: 'entry.222074440',            // 聯絡電話
+                services: 'entry.451838095',         // 感興趣的服務
+                budget: 'entry.1405852956',           // 預算範圍
+                timeline: 'entry.1005380456',         // 期望完成時間
+                requirements: 'entry.1408160052'      // 詳細需求描述
+            };
+
+            const googleData = new FormData();
+            
+            // 添加基本欄位
+            googleData.append(fieldMapping.companyName, formData.companyName || '');
+            googleData.append(fieldMapping.contactPerson, formData.contactPerson || '');
+            googleData.append(fieldMapping.email, formData.email || '');
+            googleData.append(fieldMapping.phone, formData.phone || '');
+            googleData.append(fieldMapping.budget, formData.budget || '');
+            googleData.append(fieldMapping.timeline, formData.timeline || '');
+            googleData.append(fieldMapping.requirements, formData.requirements || '');
+            
+            // 處理複選框服務
+            if (formData.services && Array.isArray(formData.services)) {
+                formData.services.forEach(service => {
+                    googleData.append(fieldMapping.services, service);
+                });
+                // 添加 sentinel 欄位
+                googleData.append(`${fieldMapping.services}_sentinel`, '');
+            }
+
+            // 提交到 Google Forms
+            const response = await fetch('https://docs.google.com/forms/d/e/1FAIpQLSfy2Wk9bLc4H4IFNF2BAG2j-FajanxnE3U7TscZasCP7W5uDQ/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: googleData
+            });
+
+            console.log('Google Forms 提交成功');
+            return { success: true, method: 'googleForms' };
+            
+        } catch (error) {
+            console.error('Google Forms 提交失敗:', error);
+            // 回退到顯示聯絡資訊
+            alert('表單提交成功！我們將透過其他方式與您聯繫。');
+            return { success: false, method: 'fallback' };
+        }
     }
 
     formatEmailBody(formData) {
