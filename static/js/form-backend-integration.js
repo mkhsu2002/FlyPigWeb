@@ -9,7 +9,7 @@ class FormBackendIntegration {
             // Google Forms 整合（推薦）
             googleForms: {
                 enabled: true,
-                formId: '1nJAbLO50ySDfgodx_SYP3xB-aFzHPcY-Kthaoki67XQ',
+                formId: '1FAIpQLSfy2Wk9bLc4H4IFNF2BAG2j-FajanxnE3U7TscZasCP7W5uDQ',
                 // 欄位對應（需要與 Google Forms 欄位名稱匹配）
                 fieldMapping: {
                     'entry.1234567890': 'companyName',     // 公司名稱
@@ -48,13 +48,15 @@ class FormBackendIntegration {
             // 轉換數據格式以符合 Google Forms
             const googleFormsData = this.convertToGoogleFormsFormat(formData);
             
-            // 構建 Google Forms 提交 URL
-            const submitUrl = `https://docs.google.com/forms/d/${this.config.googleForms.formId}/formResponse`;
+            // 構建 Google Forms 提交 URL（新格式）
+            const submitUrl = `https://docs.google.com/forms/d/e/${this.config.googleForms.formId}/formResponse`;
             
             // 創建 FormData 對象
             const formDataToSubmit = new FormData();
             Object.entries(googleFormsData).forEach(([key, value]) => {
-                formDataToSubmit.append(key, value);
+                if (value !== undefined && value !== null && value !== '') {
+                    formDataToSubmit.append(key, value);
+                }
             });
             
             // 提交到 Google Forms
@@ -79,19 +81,23 @@ class FormBackendIntegration {
     convertToGoogleFormsFormat(formData) {
         const googleData = {};
         
-        // 基本資料對應
-        googleData['entry.1234567890'] = formData.companyName || '';
-        googleData['entry.1234567891'] = formData.contactPerson || '';
-        googleData['entry.1234567892'] = formData.email || '';
-        googleData['entry.1234567893'] = formData.phone || '';
-        googleData['entry.1234567895'] = formData.budget || '';
-        googleData['entry.1234567896'] = formData.timeline || '';
-        googleData['entry.1234567897'] = formData.requirements || '';
+        // 根據您的新 Google Forms 欄位對應
+        // 這些 entry 名稱需要從實際的 Google Forms 中獲取
+        // 暫時使用通用格式，實際使用時需要檢查 Google Forms 的實際欄位名稱
+        
+        // 基本資料對應（需要根據實際表單調整）
+        googleData['entry.XXXXXXXXXX'] = formData.companyName || '';
+        googleData['entry.XXXXXXXXXX'] = formData.contactPerson || '';
+        googleData['entry.XXXXXXXXXX'] = formData.email || '';
+        googleData['entry.XXXXXXXXXX'] = formData.phone || '';
+        googleData['entry.XXXXXXXXXX'] = formData.budget || '';
+        googleData['entry.XXXXXXXXXX'] = formData.timeline || '';
+        googleData['entry.XXXXXXXXXX'] = formData.requirements || '';
         
         // 處理服務選擇（複選框）
         if (formData.services && Array.isArray(formData.services)) {
             formData.services.forEach((service, index) => {
-                googleData[`entry.1234567894_${index}`] = service;
+                googleData[`entry.XXXXXXXXXX_${index}`] = service;
             });
         }
         
