@@ -60,11 +60,12 @@ class SimpleFormSubmission {
     }
 
     sendViaMailto(formData) {
-        const subject = encodeURIComponent(`FlyPig AI 業務洽詢 - ${formData.companyName}`);
-        const body = encodeURIComponent(this.formatEmailBody(formData));
+        // 取消自動開啟郵件客戶端
+        console.log('表單數據已收集，但不自動開啟郵件客戶端');
+        console.log('表單數據:', formData);
         
-        const mailtoLink = `mailto:${this.fallbackEmail}?subject=${subject}&body=${body}`;
-        window.open(mailtoLink, '_blank');
+        // 可以選擇顯示提示訊息
+        alert('表單提交成功！我們將透過其他方式與您聯繫。');
     }
 
     formatEmailBody(formData) {

@@ -286,14 +286,14 @@ class EnhancedContactForm {
                         <p><strong>服務需求：</strong>${Array.isArray(data.services) ? data.services.join(', ') : data.services}</p>
                     </div>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <a href="mailto:sales@icareu.tw?subject=業務洽詢 - ${data.companyName}&body=公司名稱：${data.companyName}%0A聯絡人：${data.contactPerson}%0A電子信箱：${data.email}%0A聯絡電話：${data.phone}%0A服務需求：${Array.isArray(data.services) ? data.services.join(', ') : data.services}%0A預算範圍：${data.budget}%0A期望時程：${data.timeline}%0A需求描述：${data.requirements}" class="btn btn-primary">
-                            <i class="fas fa-envelope me-2"></i>發送郵件
-                        </a>
                         <a href="tel:03-5735430" class="btn btn-success">
                             <i class="fas fa-phone me-2"></i>立即致電
                         </a>
                         <a href="https://www.facebook.com/FlyPigAI" target="_blank" class="btn btn-outline-primary">
                             <i class="fab fa-facebook-f me-2"></i>關注我們
+                        </a>
+                        <a href="https://line.me/ti/p/@icareutw" target="_blank" class="btn btn-outline-success">
+                            <i class="fab fa-line me-2"></i>LINE 聯絡
                         </a>
                     </div>
                 </div>
