@@ -262,42 +262,112 @@ class EnhancedContactForm {
 
     async submitFormData(data) {
         try {
-            // 優先使用直接提交系統
+            // 使用直接提交系統
             if (window.DirectFormSubmission) {
                 const directSubmit = new DirectFormSubmission();
                 const result = await directSubmit.submitForm(data);
                 console.log('直接提交結果:', result);
+                
+                // 顯示成功訊息
+                this.showSuccessMessage();
                 return;
             }
 
-            // 備用：使用簡化版提交系統
-            if (window.SimpleFormSubmission) {
-                const simpleSubmit = new SimpleFormSubmission();
-                const result = await simpleSubmit.submitForm(data);
-                console.log('簡化版提交結果:', result);
-                return;
-            }
-
-            // 備用：嘗試使用後端整合
-            if (window.FormBackendIntegration) {
-                const backend = new FormBackendIntegration();
-                const results = await backend.submitForm(data);
-                console.log('後端整合提交結果:', results);
-                this.logSubmissionStats(data, results);
-                return;
-            }
-
-            // 最後備用：模擬提交並顯示聯絡資訊
-            console.warn('所有提交方式都不可用，使用備用方案');
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            this.showContactInfo(data);
+            // 備用：直接提交到 Google Forms
+            await this.submitToGoogleFormsDirectly(data);
             
         } catch (error) {
             console.error('表單提交錯誤:', error);
             
-            // 如果所有方式都失敗，顯示聯絡資訊
+            // 如果提交失敗，顯示聯絡資訊
             this.showContactInfo(data);
             this.fallbackDataLog(data);
+        }
+    }
+
+    async submitToGoogleFormsDirectly(formData) {
+        try {
+            console.log('🚀 直接提交到 Google Forms...');
+            
+            // 使用實際的欄位映射
+            const fieldMapping = {
+                companyName: 'entry.1716438352',
+                contactPerson: 'entry.2095342285',
+                email: 'entry.1347829561',
+                phone: 'entry.222074440',
+                services: 'entry.451838095',
+                budget: 'entry.1405852956',
+                timeline: 'entry.1005380456',
+                requirements: 'entry.1408160052'
+            };
+
+            const googleFormData = new FormData();
+            
+            // 添加基本欄位
+            googleFormData.append(fieldMapping.companyName, formData.companyName || '');
+            googleFormData.append(fieldMapping.contactPerson, formData.contactPerson || '');
+            googleFormData.append(fieldMapping.email, formData.email || '');
+            googleFormData.append(fieldMapping.phone, formData.phone || '');
+            googleFormData.append(fieldMapping.budget, formData.budget || '');
+            googleFormData.append(fieldMapping.timeline, formData.timeline || '');
+            googleFormData.append(fieldMapping.requirements, formData.requirements || '');
+            
+            // 處理複選框服務
+            if (formData.services && Array.isArray(formData.services)) {
+                // 添加 sentinel 欄位
+                googleFormData.append(`${fieldMapping.services}_sentinel`, '');
+                // 添加每個選項
+                formData.services.forEach(service => {
+                    googleFormData.append(fieldMapping.services, service);
+                });
+            }
+
+            // 提交到 Google Forms
+            await fetch('https://docs.google.com/forms/d/e/1FAIpQLSfy2Wk9bLc4H4IFNF2BAG2j-FajanxnE3U7TscZasCP7W5uDQ/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: googleFormData
+            });
+
+            console.log('✅ Google Forms 提交成功');
+            this.showSuccessMessage();
+            
+        } catch (error) {
+            console.error('Google Forms 提交失敗:', error);
+            throw error;
+        }
+    }
+
+    showSuccessMessage() {
+        const successMessage = document.getElementById('successMessage');
+        if (successMessage) {
+            successMessage.innerHTML = `
+                <div class="form-success-animation">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 style="color: #4CAF50; margin-bottom: 1rem;">提交成功！</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">
+                        感謝您的洽詢！我們的專業團隊將在 24 小時內與您聯繫。
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="tel:03-5735430" class="btn btn-success">
+                            <i class="fas fa-phone me-2"></i>立即致電
+                        </a>
+                        <a href="https://line.me/ti/p/@icareutw" target="_blank" class="btn btn-outline-success">
+                            <i class="fab fa-line me-2"></i>LINE 聯絡
+                        </a>
+                        <a href="https://www.facebook.com/FlyPigAI" target="_blank" class="btn btn-outline-primary">
+                            <i class="fab fa-facebook-f me-2"></i>關注我們
+                        </a>
+                    </div>
+                </div>
+            `;
+            successMessage.style.display = 'block';
+            
+            // 隱藏表單
+            this.form.style.display = 'none';
+            this.formStatus.style.display = 'none';
         }
     }
 
