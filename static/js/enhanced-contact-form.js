@@ -265,7 +265,15 @@ class EnhancedContactForm {
             console.log('🚀 開始表單提交...');
             console.log('表單數據:', data);
             
-            // 使用 Email 提交方式
+            // 優先使用 Formspree 自動發送
+            try {
+                await this.submitViaFormspree(data);
+                return; // 成功則直接返回
+            } catch (formspreeError) {
+                console.warn('⚠️ Formspree 提交失敗，使用備用方案:', formspreeError.message);
+            }
+            
+            // 備用方案：使用 Email 提交方式
             await this.submitViaEmail(data);
             
         } catch (error) {
@@ -274,6 +282,91 @@ class EnhancedContactForm {
             // 如果提交失敗，顯示聯絡資訊
             this.showContactInfo(data);
             this.fallbackDataLog(data);
+        }
+    }
+
+    async submitViaFormspree(formData) {
+        try {
+            console.log('📧 開始 Formspree 自動發送...');
+            
+            // Formspree endpoint - 需要替換為實際的 Form ID
+            const endpoint = 'https://formspree.io/f/YOUR_FORM_ID';
+            
+            const submitData = {
+                _replyto: formData.email || '',
+                _subject: `FlyPig AI 業務洽詢 - ${formData.companyName || '未知公司'}`,
+                _cc: formData.email || '', // 副本給用戶
+                
+                // 表單欄位
+                company_name: formData.companyName || '',
+                contact_person: formData.contactPerson || '',
+                email: formData.email || '',
+                phone: formData.phone || '',
+                services: Array.isArray(formData.services) ? formData.services.join(', ') : formData.services || '',
+                budget: formData.budget || '',
+                timeline: formData.timeline || '',
+                requirements: formData.requirements || '',
+                
+                // 額外資訊
+                submit_time: new Date().toLocaleString('zh-TW'),
+                source_url: window.location.href,
+                user_agent: navigator.userAgent
+            };
+
+            console.log('📊 提交數據:', submitData);
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(submitData)
+            });
+
+            if (response.ok) {
+                console.log('✅ Formspree 提交成功');
+                this.showFormspreeSuccess();
+            } else {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+
+        } catch (error) {
+            console.error('❌ Formspree 提交失敗:', error);
+            throw error;
+        }
+    }
+
+    showFormspreeSuccess() {
+        const successMessage = document.getElementById('successMessage');
+        if (successMessage) {
+            successMessage.innerHTML = `
+                <div class="form-success-animation">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 style="color: #4CAF50; margin-bottom: 1rem;">提交成功！</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">
+                        感謝您的洽詢！我們已收到您的訊息，並將在 24 小時內回覆到您的信箱。
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="tel:03-5735430" class="btn btn-success">
+                            <i class="fas fa-phone me-2"></i>立即致電
+                        </a>
+                        <a href="https://line.me/ti/p/@icareutw" target="_blank" class="btn btn-outline-success">
+                            <i class="fab fa-line me-2"></i>LINE 聯絡
+                        </a>
+                        <a href="https://www.facebook.com/FlyPigAI" target="_blank" class="btn btn-outline-primary">
+                            <i class="fab fa-facebook-f me-2"></i>關注我們
+                        </a>
+                    </div>
+                </div>
+            `;
+            successMessage.style.display = 'block';
+            
+            // 隱藏表單
+            this.form.style.display = 'none';
+            this.formStatus.style.display = 'none';
         }
     }
 
