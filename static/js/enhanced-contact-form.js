@@ -265,8 +265,8 @@ class EnhancedContactForm {
             console.log('🚀 開始表單提交...');
             console.log('表單數據:', data);
             
-            // 直接提交到 Google Forms
-            await this.submitToGoogleFormsDirectly(data);
+            // 使用 Email 提交方式
+            await this.submitViaEmail(data);
             
         } catch (error) {
             console.error('表單提交錯誤:', error);
@@ -277,56 +277,132 @@ class EnhancedContactForm {
         }
     }
 
-    async submitToGoogleFormsDirectly(formData) {
+    async submitViaEmail(formData) {
         try {
-            console.log('🚀 直接提交到 Google Forms...');
+            console.log('📧 開始 Email 提交...');
             
-            // 使用實際的欄位映射
-            const fieldMapping = {
-                companyName: 'entry.1005380456',
-                contactPerson: 'entry.1347829561',
-                email: 'entry.1405852956',
-                phone: 'entry.1408160052',
-                services: 'entry.1716438352',
-                budget: 'entry.2095342285',
-                timeline: 'entry.222074440',
-                requirements: 'entry.451838095'
-            };
-
-            const googleFormData = new FormData();
+            // 生成 email 內容
+            const emailContent = this.generateEmailContent(formData);
+            console.log('📝 Email 內容:', emailContent);
             
-            // 添加基本欄位
-            googleFormData.append(fieldMapping.companyName, formData.companyName || '');
-            googleFormData.append(fieldMapping.contactPerson, formData.contactPerson || '');
-            googleFormData.append(fieldMapping.email, formData.email || '');
-            googleFormData.append(fieldMapping.phone, formData.phone || '');
-            googleFormData.append(fieldMapping.budget, formData.budget || '');
-            googleFormData.append(fieldMapping.timeline, formData.timeline || '');
-            googleFormData.append(fieldMapping.requirements, formData.requirements || '');
+            // 顯示 email 提交界面
+            this.showEmailSubmissionInterface(emailContent);
             
-            // 處理複選框服務
-            if (formData.services && Array.isArray(formData.services)) {
-                // 添加 sentinel 欄位
-                googleFormData.append(`${fieldMapping.services}_sentinel`, '');
-                // 添加每個選項
-                formData.services.forEach(service => {
-                    googleFormData.append(fieldMapping.services, service);
-                });
-            }
-
-            // 提交到 Google Forms
-            await fetch('https://docs.google.com/forms/d/e/1FAIpQLSfy2Wk9bLc4H4IFNF2BAG2j-FajanxnE3U7TscZasCP7W5uDQ/formResponse', {
-                method: 'POST',
-                mode: 'no-cors',
-                body: googleFormData
-            });
-
-            console.log('✅ Google Forms 提交成功');
-            this.showSuccessMessage();
+            // 同時嘗試開啟郵件客戶端
+            this.openMailtoClient(emailContent);
+            
+            console.log('✅ Email 提交準備完成');
             
         } catch (error) {
-            console.error('Google Forms 提交失敗:', error);
+            console.error('Email 提交失敗:', error);
             throw error;
+        }
+    }
+
+    generateEmailContent(formData) {
+        const timestamp = new Date().toLocaleString('zh-TW');
+        const sourceUrl = window.location.href;
+        
+        const emailBody = `FlyPig AI 業務洽詢表單提交
+
+公司名稱：${formData.companyName || ''}
+聯絡人姓名：${formData.contactPerson || ''}
+電子信箱：${formData.email || ''}
+聯絡電話：${formData.phone || ''}
+
+感興趣的服務：
+${Array.isArray(formData.services) ? formData.services.join('\n- ') : formData.services || ''}
+
+預算範圍：${formData.budget || ''}
+期望完成時間：${formData.timeline || ''}
+
+詳細需求描述：
+${formData.requirements || ''}
+
+---
+提交時間：${timestamp}
+來源網址：${sourceUrl}
+
+此郵件由 FlyPig AI 網站表單自動生成`;
+
+        return {
+            to: 'flypig@icareu.tw',
+            subject: `FlyPig AI 業務洽詢 - ${formData.companyName || '未知公司'}`,
+            body: emailBody.trim()
+        };
+    }
+
+    showEmailSubmissionInterface(emailContent) {
+        const successMessage = document.getElementById('successMessage');
+        if (successMessage) {
+            successMessage.innerHTML = `
+                <div class="form-success-animation">
+                    <div class="success-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 style="color: #4CAF50; margin-bottom: 1rem;">表單提交成功！</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">
+                        請將以下內容複製並發送到我們的信箱：
+                    </p>
+                    
+                    <div style="
+                        background: #f8f9fa;
+                        border: 1px solid #dee2e6;
+                        border-radius: 8px;
+                        padding: 20px;
+                        margin: 20px 0;
+                        text-align: left;
+                        font-family: monospace;
+                        white-space: pre-wrap;
+                        max-height: 300px;
+                        overflow-y: auto;
+                    ">
+<strong>收件人：</strong>${emailContent.to}
+<strong>主旨：</strong>${emailContent.subject}
+
+${emailContent.body}
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+                        <button onclick="copyEmailContent()" class="btn btn-primary">
+                            <i class="fas fa-copy me-2"></i>複製內容
+                        </button>
+                        <a href="mailto:${emailContent.to}?subject=${encodeURIComponent(emailContent.subject)}&body=${encodeURIComponent(emailContent.body)}" 
+                           class="btn btn-success">
+                            <i class="fas fa-envelope me-2"></i>開啟郵件客戶端
+                        </a>
+                        <a href="tel:03-5735430" class="btn btn-outline-primary">
+                            <i class="fas fa-phone me-2"></i>直接致電
+                        </a>
+                        <a href="https://line.me/ti/p/@icareutw" target="_blank" class="btn btn-outline-success">
+                            <i class="fab fa-line me-2"></i>LINE 聯絡
+                        </a>
+                    </div>
+                </div>
+            `;
+            successMessage.style.display = 'block';
+            
+            // 隱藏表單
+            this.form.style.display = 'none';
+            this.formStatus.style.display = 'none';
+        }
+        
+        // 儲存 email 內容到全域變數
+        window.emailContent = emailContent;
+    }
+
+    openMailtoClient(emailContent) {
+        try {
+            const encodedSubject = encodeURIComponent(emailContent.subject);
+            const encodedBody = encodeURIComponent(emailContent.body);
+            const mailtoUrl = `mailto:${emailContent.to}?subject=${encodedSubject}&body=${encodedBody}`;
+            
+            // 嘗試打開郵件客戶端
+            window.open(mailtoUrl, '_blank');
+            console.log('📧 郵件客戶端已開啟');
+            
+        } catch (error) {
+            console.log('⚠️ 無法自動開啟郵件客戶端:', error.message);
         }
     }
 
@@ -496,3 +572,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 導出類別供其他腳本使用
 window.EnhancedContactForm = EnhancedContactForm;
+
+// 全域函數
+window.copyEmailContent = function() {
+    if (window.emailContent) {
+        const emailText = `收件人: ${window.emailContent.to}\n主旨: ${window.emailContent.subject}\n\n${window.emailContent.body}`;
+        
+        navigator.clipboard.writeText(emailText).then(() => {
+            alert('Email 內容已複製到剪貼簿！');
+        }).catch(err => {
+            // 備用方案
+            const textArea = document.createElement('textarea');
+            textArea.value = emailText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Email 內容已複製到剪貼簿！');
+        });
+    } else {
+        alert('沒有可複製的 Email 內容！');
+    }
+};
