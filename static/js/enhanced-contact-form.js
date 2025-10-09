@@ -262,7 +262,15 @@ class EnhancedContactForm {
 
     async submitFormData(data) {
         try {
-            // 優先使用簡化版提交系統
+            // 優先使用直接提交系統
+            if (window.DirectFormSubmission) {
+                const directSubmit = new DirectFormSubmission();
+                const result = await directSubmit.submitForm(data);
+                console.log('直接提交結果:', result);
+                return;
+            }
+
+            // 備用：使用簡化版提交系統
             if (window.SimpleFormSubmission) {
                 const simpleSubmit = new SimpleFormSubmission();
                 const result = await simpleSubmit.submitForm(data);

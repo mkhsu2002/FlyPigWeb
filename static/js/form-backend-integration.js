@@ -96,14 +96,12 @@ class FormBackendIntegration {
         // 基本資料對應
         Object.entries(fieldMapping).forEach(([dataKey, fieldName]) => {
             if (dataKey === 'services' && Array.isArray(formData[dataKey])) {
-                // 處理複選框服務選擇 - 複選框使用相同的 entry 名稱，但每個選項都要提交
+                // 處理複選框服務選擇
+                // 添加 sentinel 欄位
+                googleData[`${fieldName}_sentinel`] = '';
+                // 添加每個選項 - 複選框使用相同的 entry 名稱多次
                 formData[dataKey].forEach((service) => {
-                    // 對於複選框，我們需要添加一個隱藏的 sentinel 欄位
-                    googleData[`${fieldName}_sentinel`] = ''; // 添加 sentinel 欄位
-                });
-                // 然後添加實際的服務選擇
-                formData[dataKey].forEach((service) => {
-                    googleData[fieldName] = service;
+                    googleData[fieldName] = service; // 這會覆蓋前一個值，但 FormData 會處理多個相同名稱
                 });
             } else if (formData[dataKey] !== undefined && formData[dataKey] !== '') {
                 googleData[fieldName] = formData[dataKey];
