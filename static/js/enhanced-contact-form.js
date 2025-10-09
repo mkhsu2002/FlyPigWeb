@@ -296,6 +296,7 @@ class EnhancedContactForm {
                 _replyto: formData.email || '',
                 _subject: `FlyPig AI 業務洽詢 - ${formData.companyName || '未知公司'}`,
                 _cc: formData.email || '', // 副本給用戶
+                // 主要收件人已在 Formspree 中設定為 mkhsu2002@gmail.com
                 
                 // 表單欄位
                 company_name: formData.companyName || '',
@@ -419,7 +420,7 @@ ${formData.requirements || ''}
 此郵件由 FlyPig AI 網站表單自動生成`;
 
         return {
-            to: 'flypig@icareu.tw',
+            to: 'mkhsu2002@gmail.com',
             subject: `FlyPig AI 業務洽詢 - ${formData.companyName || '未知公司'}`,
             body: emailBody.trim()
         };
