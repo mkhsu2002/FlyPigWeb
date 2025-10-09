@@ -262,18 +262,10 @@ class EnhancedContactForm {
 
     async submitFormData(data) {
         try {
-            // 使用直接提交系統
-            if (window.DirectFormSubmission) {
-                const directSubmit = new DirectFormSubmission();
-                const result = await directSubmit.submitForm(data);
-                console.log('直接提交結果:', result);
-                
-                // 顯示成功訊息
-                this.showSuccessMessage();
-                return;
-            }
-
-            // 備用：直接提交到 Google Forms
+            console.log('🚀 開始表單提交...');
+            console.log('表單數據:', data);
+            
+            // 直接提交到 Google Forms
             await this.submitToGoogleFormsDirectly(data);
             
         } catch (error) {
