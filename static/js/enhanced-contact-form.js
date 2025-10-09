@@ -136,6 +136,23 @@ class EnhancedContactForm {
         }
     }
 
+    validateSelect(selectId, errorId, message) {
+        const select = document.getElementById(selectId);
+        const errorElement = document.getElementById(errorId);
+        
+        if (!select || !select.value || select.value === '') {
+            if (errorElement) {
+                this.showFieldError(select, message, errorElement);
+            }
+            return false;
+        } else {
+            if (errorElement) {
+                this.clearFieldError(select, errorElement);
+            }
+            return true;
+        }
+    }
+
     showFieldError(field, message, errorElement = null) {
         if (field) {
             const error = field.parentElement.querySelector('.field-error');
@@ -175,6 +192,16 @@ class EnhancedContactForm {
 
         // 驗證服務選擇
         if (!this.validateServices()) {
+            isValid = false;
+        }
+
+        // 驗證預算範圍（必填）
+        if (!this.validateSelect('budget', 'budgetError', '請選擇預算範圍')) {
+            isValid = false;
+        }
+
+        // 驗證期望完成時間（必填）
+        if (!this.validateSelect('timeline', 'timelineError', '請選擇期望完成時間')) {
             isValid = false;
         }
 

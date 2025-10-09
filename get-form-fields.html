@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>獲取 Google Forms 欄位名稱</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2196F3; }
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .field-list {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .field-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-left: 4px solid #2196F3;
+        }
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .code-block {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Google Forms 欄位名稱獲取工具</h1>
+        
+        <div class="instructions">
+            <h3>📋 使用說明：</h3>
+            <ol>
+                <li>按 F12 開啟瀏覽器開發者工具</li>
+                <li>點擊「載入表單」按鈕</li>
+                <li>在表單中隨便填寫一些資料</li>
+                <li>點擊「分析表單欄位」按鈕</li>
+                <li>查看下方顯示的欄位名稱</li>
+                <li>複製生成的程式碼</li>
+            </ol>
+        </div>
+
+        <button onclick="loadForm()">載入表單</button>
+        <button onclick="analyzeForm()">分析表單欄位</button>
+        <button onclick="copyCode()">複製程式碼</button>
+        <button onclick="testSubmit()">測試提交</button>
+
+        <div id="formContainer"></div>
+
+        <div class="field-list" id="fieldsList">
+            <h3>找到的欄位：</h3>
+            <p>點擊「分析表單欄位」來查看...</p>
+        </div>
+
+        <div class="code-block" id="codeBlock" style="display:none;">
+            <h3>生成的程式碼：</h3>
+            <pre id="generatedCode"></pre>
+        </div>
+    </div>
+
+    <script>
+        const formId = '1FAIpQLSfy2Wk9bLc4H4IFNF2BAG2j-FajanxnE3U7TscZasCP7W5uDQ';
+        let foundFields = [];
+
+        function loadForm() {
+            const container = document.getElementById('formContainer');
+            container.innerHTML = `
+                <h3>Google Forms 表單：</h3>
+                <iframe src="https://docs.google.com/forms/d/e/${formId}/viewform?embedded=true" 
+                    id="googleForm">
+                </iframe>
+            `;
+        }
+
+        function analyzeForm() {
+            const iframe = document.getElementById('googleForm');
+            if (!iframe) {
+                alert('請先點擊「載入表單」按鈕');
+                return;
+            }
+
+            try {
+                // 嘗試從 iframe 中獲取欄位
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const inputs = iframeDoc.querySelectorAll('input[name^="entry."], textarea[name^="entry."], select[name^="entry."]');
+                
+                foundFields = [];
+                const fieldsList = document.getElementById('fieldsList');
+                fieldsList.innerHTML = '<h3>找到的欄位：</h3>';
+
+                if (inputs.length === 0) {
+                    fieldsList.innerHTML += '<p style="color: red;">⚠️ 由於 CORS 限制，無法直接讀取 iframe 內容。</p>';
+                    fieldsList.innerHTML += '<p>請按照以下步驟手動獲取：</p>';
+                    fieldsList.innerHTML += '<ol><li>在表單 iframe 上按右鍵 → 檢查</li><li>在開發者工具中搜尋 "entry."</li><li>找到所有 input/textarea 的 name 屬性</li></ol>';
+                    
+                    // 提供手動輸入界面
+                    showManualInput();
+                    return;
+                }
+
+                inputs.forEach((input, index) => {
+                    const fieldName = input.name;
+                    const fieldType = input.type || input.tagName.toLowerCase();
+                    const label = getFieldLabel(input);
+                    
+                    foundFields.push({
+                        name: fieldName,
+                        type: fieldType,
+                        label: label
+                    });
+
+                    fieldsList.innerHTML += `
+                        <div class="field-item">
+                            <strong>${index + 1}. ${fieldName}</strong><br>
+                            類型: ${fieldType}<br>
+                            標籤: ${label || '未知'}
+                        </div>
+                    `;
+                });
+
+                generateCode();
+            } catch (error) {
+                console.error('分析失敗:', error);
+                alert('由於 CORS 限制，無法直接分析。請使用手動方式。');
+                showManualInput();
+            }
+        }
+
+        function getFieldLabel(input) {
+            // 嘗試找到對應的 label
+            const parent = input.closest('[role="listitem"]') || input.closest('.freebirdFormviewerComponentsQuestionBaseRoot');
+            if (parent) {
+                const label = parent.querySelector('[role="heading"]') || parent.querySelector('.freebirdFormviewerComponentsQuestionBaseTitle');
+                return label ? label.textContent.trim() : '';
+            }
+            return '';
+        }
+
+        function showManualInput() {
+            const fieldsList = document.getElementById('fieldsList');
+            fieldsList.innerHTML += `
+                <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 5px;">
+                    <h4>🔧 手動輸入欄位名稱：</h4>
+                    <p>請按照表單順序輸入 entry 欄位名稱（例如: entry.123456789）</p>
+                    <input type="text" id="field1" placeholder="公司名稱 (entry.XXXXXXXXXX)" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+                    <input type="text" id="field2" placeholder="聯絡人姓名 (entry.XXXXXXXXXX)" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+                    <input type="text" id="field3" placeholder="電子信箱 (entry.XXXXXXXXXX)" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+                    <input type="text" id="field4" placeholder="聯絡電話 (entry.XXXXXXXXXX)" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+                    <input type="text" id="field5" placeholder="感興趣的服務 (entry.XXXXXXXXXX)" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+                    <input type="text" id="field6" placeholder="預算範圍 (entry.XXXXXXXXXX)" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+                    <input type="text" id="field7" placeholder="期望完成時間 (entry.XXXXXXXXXX)" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+                    <input type="text" id="field8" placeholder="詳細需求描述 (entry.XXXXXXXXXX)" style="width: 100%; padding: 8px; margin: 5px 0;"><br>
+                    <button onclick="generateCodeFromManual()">生成程式碼</button>
+                </div>
+            `;
+        }
+
+        function generateCodeFromManual() {
+            foundFields = [
+                { name: document.getElementById('field1').value, label: '公司名稱' },
+                { name: document.getElementById('field2').value, label: '聯絡人姓名' },
+                { name: document.getElementById('field3').value, label: '電子信箱' },
+                { name: document.getElementById('field4').value, label: '聯絡電話' },
+                { name: document.getElementById('field5').value, label: '感興趣的服務' },
+                { name: document.getElementById('field6').value, label: '預算範圍' },
+                { name: document.getElementById('field7').value, label: '期望完成時間' },
+                { name: document.getElementById('field8').value, label: '詳細需求描述' }
+            ].filter(f => f.name && f.name.startsWith('entry.'));
+
+            if (foundFields.length === 0) {
+                alert('請至少輸入一個欄位名稱');
+                return;
+            }
+
+            generateCode();
+        }
+
+        function generateCode() {
+            if (foundFields.length === 0) {
+                return;
+            }
+
+            const code = `
+// Google Forms 欄位對應
+const fieldMapping = {
+    companyName: '${foundFields[0]?.name || 'entry.1000000'}',      // 公司名稱
+    contactPerson: '${foundFields[1]?.name || 'entry.1000001'}',    // 聯絡人姓名
+    email: '${foundFields[2]?.name || 'entry.1000002'}',            // 電子信箱
+    phone: '${foundFields[3]?.name || 'entry.1000003'}',            // 聯絡電話
+    services: '${foundFields[4]?.name || 'entry.1000004'}',         // 感興趣的服務
+    budget: '${foundFields[5]?.name || 'entry.1000005'}',           // 預算範圍
+    timeline: '${foundFields[6]?.name || 'entry.1000006'}',         // 期望完成時間
+    requirements: '${foundFields[7]?.name || 'entry.1000007'}'      // 詳細需求描述
+};
+
+// 提交 URL
+const submitUrl = 'https://docs.google.com/forms/d/e/${formId}/formResponse';
+            `.trim();
+
+            document.getElementById('generatedCode').textContent = code;
+            document.getElementById('codeBlock').style.display = 'block';
+
+            console.log('生成的欄位對應:', foundFields);
+        }
+
+        function copyCode() {
+            const code = document.getElementById('generatedCode').textContent;
+            if (!code) {
+                alert('請先分析表單欄位');
+                return;
+            }
+
+            navigator.clipboard.writeText(code).then(() => {
+                alert('程式碼已複製到剪貼簿！');
+            }).catch(err => {
+                console.error('複製失敗:', err);
+                alert('複製失敗，請手動複製');
+            });
+        }
+
+        function testSubmit() {
+            if (foundFields.length === 0) {
+                alert('請先分析表單欄位');
+                return;
+            }
+
+            const testData = {
+                companyName: '測試公司',
+                contactPerson: '測試人員',
+                email: 'test@example.com',
+                phone: '02-1234-5678',
+                services: ['LLM強化 AI Line Bot', '智能客服機器人'],
+                budget: '10-50萬',
+                timeline: '1-3個月',
+                requirements: '這是測試提交'
+            };
+
+            const formData = new FormData();
+            
+            foundFields.forEach((field, index) => {
+                const keys = ['companyName', 'contactPerson', 'email', 'phone', 'services', 'budget', 'timeline', 'requirements'];
+                const key = keys[index];
+                
+                if (key === 'services' && Array.isArray(testData[key])) {
+                    testData[key].forEach(service => {
+                        formData.append(field.name, service);
+                    });
+                } else if (testData[key]) {
+                    formData.append(field.name, testData[key]);
+                }
+            });
+
+            fetch(`https://docs.google.com/forms/d/e/${formId}/formResponse`, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                alert('✅ 測試提交已發送！請檢查 Google Forms 回應頁面。');
+            }).catch(err => {
+                console.error('提交失敗:', err);
+                alert('❌ 提交失敗: ' + err.message);
+            });
+        }
+
+        // 頁面載入時顯示說明
+        window.onload = function() {
+            console.log('Google Forms ID:', formId);
+            console.log('請按照說明操作來獲取欄位名稱');
+        };
+    </script>
+</body>
+</html>
