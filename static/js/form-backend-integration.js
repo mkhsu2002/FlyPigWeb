@@ -81,26 +81,32 @@ class FormBackendIntegration {
     convertToGoogleFormsFormat(formData) {
         const googleData = {};
         
-        // 根據您的新 Google Forms 欄位對應
-        // 這些 entry 名稱需要從實際的 Google Forms 中獲取
-        // 暫時使用通用格式，實際使用時需要檢查 Google Forms 的實際欄位名稱
+        // 基於常見的 Google Forms 欄位命名規則
+        // 這些是估計的欄位名稱，實際可能需要調整
+        const fieldMapping = {
+            companyName: 'entry.1000000',      // 公司名稱
+            contactPerson: 'entry.1000001',    // 聯絡人姓名
+            email: 'entry.1000002',            // 電子信箱
+            phone: 'entry.1000003',            // 聯絡電話
+            services: 'entry.1000004',         // 感興趣的服務（複選框）
+            budget: 'entry.1000005',           // 預算範圍
+            timeline: 'entry.1000006',         // 期望完成時間
+            requirements: 'entry.1000007'      // 詳細需求描述
+        };
         
-        // 基本資料對應（需要根據實際表單調整）
-        googleData['entry.XXXXXXXXXX'] = formData.companyName || '';
-        googleData['entry.XXXXXXXXXX'] = formData.contactPerson || '';
-        googleData['entry.XXXXXXXXXX'] = formData.email || '';
-        googleData['entry.XXXXXXXXXX'] = formData.phone || '';
-        googleData['entry.XXXXXXXXXX'] = formData.budget || '';
-        googleData['entry.XXXXXXXXXX'] = formData.timeline || '';
-        googleData['entry.XXXXXXXXXX'] = formData.requirements || '';
+        // 基本資料對應
+        Object.entries(fieldMapping).forEach(([dataKey, fieldName]) => {
+            if (dataKey === 'services' && Array.isArray(formData[dataKey])) {
+                // 處理複選框服務選擇
+                formData[dataKey].forEach((service, index) => {
+                    googleData[`${fieldName}_${index}`] = service;
+                });
+            } else if (formData[dataKey] !== undefined && formData[dataKey] !== '') {
+                googleData[fieldName] = formData[dataKey];
+            }
+        });
         
-        // 處理服務選擇（複選框）
-        if (formData.services && Array.isArray(formData.services)) {
-            formData.services.forEach((service, index) => {
-                googleData[`entry.XXXXXXXXXX_${index}`] = service;
-            });
-        }
-        
+        console.log('轉換後的 Google Forms 數據:', googleData);
         return googleData;
     }
 

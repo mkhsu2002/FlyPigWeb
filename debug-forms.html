@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Forms 調試工具 - FlyPig AI</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        .debug-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .log-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        .test-form {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .btn-debug {
+            margin: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="debug-container">
+                    <h1><i class="fas fa-bug me-3"></i>Google Forms 調試工具</h1>
+                    <p class="text-muted">用於檢查和修復 Google Forms 提交問題</p>
+                    
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle me-2"></i>使用說明</h5>
+                        <ol>
+                            <li>點擊「檢查 Google Forms 欄位」來獲取實際的欄位名稱</li>
+                            <li>使用「測試表單提交」來驗證數據是否能正確提交</li>
+                            <li>查看控制台和下方的日誌來了解詳細信息</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- 測試表單 -->
+                <div class="debug-container test-form">
+                    <h3><i class="fas fa-flask me-2"></i>測試表單數據</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">公司名稱</label>
+                                <input type="text" class="form-control" id="testCompanyName" value="測試科技股份有限公司">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">聯絡人</label>
+                                <input type="text" class="form-control" id="testContactPerson" value="張三">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">電子信箱</label>
+                                <input type="email" class="form-control" id="testEmail" value="test@example.com">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">聯絡電話</label>
+                                <input type="tel" class="form-control" id="testPhone" value="02-1234-5678">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">感興趣的服務</label>
+                                <select class="form-select" id="testServices" multiple>
+                                    <option value="LLM強化 AI Line Bot" selected>LLM強化 AI Line Bot</option>
+                                    <option value="智能客服機器人">智能客服機器人</option>
+                                    <option value="電商AI影像生成">電商AI影像生成</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">預算範圍</label>
+                                <select class="form-select" id="testBudget">
+                                    <option value="10-50萬" selected>10-50萬</option>
+                                    <option value="50-100萬">50-100萬</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">期望完成時間</label>
+                                <select class="form-select" id="testTimeline">
+                                    <option value="1-3個月" selected>1-3個月</option>
+                                    <option value="3-6個月">3-6個月</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">詳細需求描述</label>
+                                <textarea class="form-control" id="testRequirements" rows="3">這是一個測試提交，用於驗證表單功能是否正常運作。</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 調試按鈕 -->
+                <div class="debug-container">
+                    <h3><i class="fas fa-tools me-2"></i>調試操作</h3>
+                    <div class="d-flex flex-wrap">
+                        <button class="btn btn-primary btn-debug" onclick="checkFormFields()">
+                            <i class="fas fa-search me-2"></i>檢查 Google Forms 欄位
+                        </button>
+                        <button class="btn btn-success btn-debug" onclick="testFormSubmission()">
+                            <i class="fas fa-paper-plane me-2"></i>測試表單提交
+                        </button>
+                        <button class="btn btn-info btn-debug" onclick="checkFormFieldsIframe()">
+                            <i class="fas fa-window-maximize me-2"></i>透過 iframe 檢查欄位
+                        </button>
+                        <button class="btn btn-warning btn-debug" onclick="clearLogs()">
+                            <i class="fas fa-trash me-2"></i>清除日誌
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 日誌顯示 -->
+                <div class="debug-container">
+                    <h3><i class="fas fa-list me-2"></i>調試日誌</h3>
+                    <div class="log-container" id="debugLogs">
+                        <div class="text-muted">點擊上方按鈕開始調試...</div>
+                    </div>
+                </div>
+
+                <!-- 返回連結 -->
+                <div class="text-center">
+                    <a href="index.html" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>返回首頁
+                    </a>
+                    <a href="admin-dashboard.html" class="btn btn-outline-secondary ms-2">
+                        <i class="fas fa-chart-line me-2"></i>管理面板
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- 載入調試工具 -->
+    <script src="static/js/google-forms-helper.js"></script>
+    
+    <script>
+        // 日誌函數
+        function addLog(message, type = 'info') {
+            const logsContainer = document.getElementById('debugLogs');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            
+            const typeClass = {
+                'info': 'text-info',
+                'success': 'text-success',
+                'warning': 'text-warning',
+                'error': 'text-danger'
+            }[type] || 'text-info';
+            
+            logEntry.innerHTML = `<span class="text-muted">[${timestamp}]</span> <span class="${typeClass}">${message}</span>`;
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+
+        function clearLogs() {
+            document.getElementById('debugLogs').innerHTML = '<div class="text-muted">日誌已清除...</div>';
+        }
+
+        // 獲取測試數據
+        function getTestData() {
+            const services = Array.from(document.getElementById('testServices').selectedOptions)
+                .map(option => option.value);
+            
+            return {
+                companyName: document.getElementById('testCompanyName').value,
+                contactPerson: document.getElementById('testContactPerson').value,
+                email: document.getElementById('testEmail').value,
+                phone: document.getElementById('testPhone').value,
+                services: services,
+                budget: document.getElementById('testBudget').value,
+                timeline: document.getElementById('testTimeline').value,
+                requirements: document.getElementById('testRequirements').value
+            };
+        }
+
+        // 檢查表單欄位
+        async function checkFormFields() {
+            addLog('開始檢查 Google Forms 欄位...', 'info');
+            
+            try {
+                const fields = await window.inspectGoogleForms();
+                if (fields) {
+                    addLog(`找到 ${fields.length} 個欄位:`, 'success');
+                    fields.forEach((field, index) => {
+                        addLog(`${index + 1}. ${field}`, 'info');
+                    });
+                } else {
+                    addLog('無法獲取欄位信息，可能是 CORS 限制', 'warning');
+                }
+            } catch (error) {
+                addLog(`檢查失敗: ${error.message}`, 'error');
+            }
+        }
+
+        // 透過 iframe 檢查欄位
+        async function checkFormFieldsIframe() {
+            addLog('透過 iframe 檢查 Google Forms 欄位...', 'info');
+            
+            try {
+                const fields = await window.inspectGoogleFormsIframe();
+                if (fields) {
+                    addLog(`透過 iframe 找到 ${fields.length} 個欄位:`, 'success');
+                    fields.forEach((field, index) => {
+                        addLog(`${index + 1}. ${field.name} (${field.type}) ${field.required ? '[必填]' : ''}`, 'info');
+                    });
+                } else {
+                    addLog('iframe 檢查失敗', 'warning');
+                }
+            } catch (error) {
+                addLog(`iframe 檢查失敗: ${error.message}`, 'error');
+            }
+        }
+
+        // 測試表單提交
+        async function testFormSubmission() {
+            const testData = getTestData();
+            addLog('開始測試表單提交...', 'info');
+            addLog(`測試數據: ${JSON.stringify(testData, null, 2)}`, 'info');
+            
+            try {
+                const success = await window.testGoogleFormsSubmission(testData);
+                if (success) {
+                    addLog('✅ 測試提交成功！', 'success');
+                    addLog('請檢查您的 Google Forms 回應頁面確認數據是否正確記錄', 'info');
+                } else {
+                    addLog('❌ 測試提交失敗', 'error');
+                }
+            } catch (error) {
+                addLog(`測試提交錯誤: ${error.message}`, 'error');
+            }
+        }
+
+        // 頁面載入完成後顯示說明
+        document.addEventListener('DOMContentLoaded', function() {
+            addLog('Google Forms 調試工具已載入', 'success');
+            addLog('請先點擊「檢查 Google Forms 欄位」來獲取實際的欄位名稱', 'info');
+        });
+    </script>
+</body>
+</html>
