@@ -289,8 +289,8 @@ class EnhancedContactForm {
         try {
             console.log('📧 開始 Formspree 自動發送...');
             
-            // Formspree endpoint - 需要替換為實際的 Form ID
-            const endpoint = 'https://formspree.io/f/YOUR_FORM_ID';
+            // Formspree endpoint - 使用實際的 Form ID
+            const endpoint = 'https://formspree.io/f/mpwyyajo';
             
             const submitData = {
                 _replyto: formData.email || '',
